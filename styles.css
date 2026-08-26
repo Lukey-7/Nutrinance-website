@@ -3,26 +3,26 @@
    Palette: green + pink + white
    ============================================================ */
 :root{
-  --green-900:#12362A;
-  --green-800:#173F30;
-  --green-700:#1F5A40;
-  --green-600:#26714F;
-  --green-500:#2E8B5F;
-  --green-300:#8FCFAE;
-  --green-100:#E2F2E9;
-  --green-50:#F1F9F4;
+  --green-900:#1B4937;
+  --green-800:#245E46;
+  --green-700:#2E7A5B;
+  --green-600:#3A9470;
+  --green-500:#48AF86;
+  --green-300:#9DD8BD;
+  --green-100:#E3F5EC;
+  --green-50:#F2FAF6;
 
-  --pink-700:#B8456B;
-  --pink-600:#D2688A;
-  --pink-400:#F0A4BC;
-  --pink-200:#FBD9E3;
-  --pink-50:#FDF2F6;
+  --pink-700:#9E1F4F;
+  --pink-600:#B82C5F;
+  --pink-400:#E582A4;
+  --pink-200:#F8D3E0;
+  --pink-50:#FDF3F7;
 
   --white:#FFFFFF;
   --cream:#FFFCFA;
-  --ink:#1B2A23;
-  --muted:#5E6F66;
-  --line:#E8EDE9;
+  --ink:#172E24;
+  --muted:#546B60;
+  --line:#E3ECE6;
   --wa:#25D366;
   --wa-dark:#1DA851;
 

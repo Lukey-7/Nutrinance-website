@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name.classList.remove("err");
 
       var lines = [
-        "Hi Vrushika! I would like to book a consultation with Nutrinance.",
+        "Hi Nutrinance! I would like to book a consultation.",
         "",
         "Name: " + name.value.trim()
       ];
