@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/lenis.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css';">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -62,17 +63,17 @@
       </div>
       <ul class="hero-stats">
         <li><strong>2,500+</strong><span>Happy clients</span></li>
-        <li><strong>25.9K</strong><span>Instagram family</span></li>
+        <li><a href="https://www.instagram.com/nutrinance.wellbeing" target="_blank" rel="noopener" class="stat-link" aria-label="Instagram family 25.9K"><strong>25.9K</strong><span>Instagram family</span></a></li>
         <li><strong>4.9<span class="star">★</span></strong><span>Average rating</span></li>
       </ul>
     </div>
 
     <div class="hero-media reveal">
       <div class="hero-img-main">
-        <img src="assets/photos/hero-main.svg" alt="Nutrinance Diet &amp; Wellness" loading="eager">
+        <img src="assets/photos/hero-main.svg" alt="Nutrinance Diet &amp; Wellness" loading="eager" width="400" height="500">
       </div>
       <div class="hero-img-sub">
-        <img src="assets/photos/hero-food.svg" alt="A balanced Indian meal bowl" loading="lazy">
+        <img src="assets/photos/hero-food.svg" alt="A balanced Indian meal bowl" loading="lazy" width="172" height="172">
       </div>
       <div class="float-card float-card-1">
         <span class="fc-icon">🥗</span>
@@ -137,11 +138,11 @@
     </div>
 
     <div class="tabs reveal" role="tablist" aria-label="Program categories">
-      <button class="tab is-active" role="tab" aria-selected="true" data-tab="loss">Weight Loss Programs</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="gain">Weight Gain Programs</button>
+      <button class="tab is-active" id="tab-loss" role="tab" aria-selected="true" aria-controls="panel-loss" tabindex="0" data-tab="loss">Weight Loss Programs</button>
+      <button class="tab" id="tab-gain" role="tab" aria-selected="false" aria-controls="panel-gain" tabindex="-1" data-tab="gain">Weight Gain Programs</button>
     </div>
 
-    <div class="tab-panel is-active" data-panel="loss">
+    <div class="tab-panel is-active" id="panel-loss" role="tabpanel" aria-labelledby="tab-loss" tabindex="0" data-panel="loss">
       <div class="prog-grid">
         <article class="prog-card reveal"><span class="prog-num">01</span><h3>Normal Weight Loss</h3><p>A steady, sustainable fat-loss plan for anyone carrying extra weight &mdash; built around your regular home food.</p><a data-wa="Hi! I am interested in the Normal Weight Loss program.">Enquire &rarr;</a></article>
         <article class="prog-card reveal"><span class="prog-num">02</span><h3>Post-Pregnancy Weight Loss</h3><p>Gentle, lactation-safe nutrition that helps new mothers recover strength first and lose weight second.</p><a data-wa="Hi! I am interested in the Post-Pregnancy Weight Loss program.">Enquire &rarr;</a></article>
@@ -156,7 +157,7 @@
       </div>
     </div>
 
-    <div class="tab-panel" data-panel="gain">
+    <div class="tab-panel" id="panel-gain" role="tabpanel" aria-labelledby="tab-gain" tabindex="0" data-panel="gain" hidden>
       <div class="prog-grid prog-grid-3">
         <article class="prog-card reveal"><span class="prog-num">01</span><h3>Weight Gain for Kids</h3><p>Nutrient-dense, kid-approved meals and lunchboxes that add healthy weight and height &mdash; without junk shortcuts.</p><a data-wa="Hi! I am interested in the Weight Gain plan for Kids.">Enquire &rarr;</a></article>
         <article class="prog-card reveal"><span class="prog-num">02</span><h3>Weight Gain for Adults</h3><p>Structured calorie surplus with the right protein split, so you gain strength and shape &mdash; not just numbers.</p><a data-wa="Hi! I am interested in the Weight Gain plan for Adults.">Enquire &rarr;</a></article>
@@ -228,97 +229,97 @@
     <div class="recipe-grid" id="recipeGrid">
 
       <article class="recipe reveal" data-cat="breakfast">
-        <div class="recipe-img"><img src="assets/recipes/breakfast-1.svg" alt="Moong dal chilla" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-img"><img src="assets/recipes/breakfast-1.svg" alt="Moong dal chilla" loading="lazy" width="400" height="300"><span class="recipe-tag">Breakfast</span></div>
         <div class="recipe-body"><h3>Moong Dal Chilla with Mint Chutney</h3><p>Savoury lentil pancakes that keep you full till lunch. Zero maida, all protein.</p>
         <ul class="recipe-meta"><li>15 min</li><li>210 kcal</li><li>High protein</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="breakfast">
-        <div class="recipe-img"><img src="assets/recipes/breakfast-2.svg" alt="Overnight oats" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-img"><img src="assets/recipes/breakfast-2.svg" alt="Overnight oats" loading="lazy" width="400" height="300"><span class="recipe-tag">Breakfast</span></div>
         <div class="recipe-body"><h3>Overnight Oats with Berries &amp; Chia</h3><p>Prep at night, grab at 8am. The easiest fix for skipped breakfasts.</p>
         <ul class="recipe-meta"><li>5 min</li><li>240 kcal</li><li>Gut friendly</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="breakfast">
-        <div class="recipe-img"><img src="assets/recipes/breakfast-3.svg" alt="Vegetable poha" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-img"><img src="assets/recipes/breakfast-3.svg" alt="Vegetable poha" loading="lazy" width="400" height="300"><span class="recipe-tag">Breakfast</span></div>
         <div class="recipe-body"><h3>Vegetable Poha with Peanuts</h3><p>The classic, rebuilt &mdash; double the veggies, measured oil, added protein.</p>
         <ul class="recipe-meta"><li>15 min</li><li>260 kcal</li><li>Iron rich</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="breakfast">
-        <div class="recipe-img"><img src="assets/recipes/breakfast-4.svg" alt="Besan toast" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-img"><img src="assets/recipes/breakfast-4.svg" alt="Besan toast" loading="lazy" width="400" height="300"><span class="recipe-tag">Breakfast</span></div>
         <div class="recipe-body"><h3>Paneer &amp; Spinach Besan Toast</h3><p>A low-GI breakfast that keeps insulin steady &mdash; a PCOS favourite.</p>
         <ul class="recipe-meta"><li>12 min</li><li>230 kcal</li><li>PCOS friendly</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="snacks">
-        <div class="recipe-img"><img src="assets/recipes/snack-1.svg" alt="Roasted chana and makhana" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-img"><img src="assets/recipes/snack-1.svg" alt="Roasted chana and makhana" loading="lazy" width="400" height="300"><span class="recipe-tag">Snacks</span></div>
         <div class="recipe-body"><h3>Roasted Chana &amp; Makhana Trail Mix</h3><p>Your 5pm chips replacement. Crunchy, salty, and actually good for you.</p>
         <ul class="recipe-meta"><li>10 min</li><li>130 kcal</li><li>Crunchy fix</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="snacks">
-        <div class="recipe-img"><img src="assets/recipes/snack-2.svg" alt="Cucumber hummus bites" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-img"><img src="assets/recipes/snack-2.svg" alt="Cucumber hummus bites" loading="lazy" width="400" height="300"><span class="recipe-tag">Snacks</span></div>
         <div class="recipe-body"><h3>Cucumber Hummus Bites</h3><p>Two ingredients, one minute, and a snack you can eat guilt-free.</p>
         <ul class="recipe-meta"><li>8 min</li><li>110 kcal</li><li>Low calorie</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="snacks">
-        <div class="recipe-img"><img src="assets/recipes/snack-3.svg" alt="Sprout chaat" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-img"><img src="assets/recipes/snack-3.svg" alt="Sprout chaat" loading="lazy" width="400" height="300"><span class="recipe-tag">Snacks</span></div>
         <div class="recipe-body"><h3>Sprout &amp; Pomegranate Chaat</h3><p>Street-food flavour, zero deep frying. Made for evening hunger pangs.</p>
         <ul class="recipe-meta"><li>10 min</li><li>150 kcal</li><li>High fibre</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="snacks">
-        <div class="recipe-img"><img src="assets/recipes/snack-4.svg" alt="Masala buttermilk" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-img"><img src="assets/recipes/snack-4.svg" alt="Masala buttermilk" loading="lazy" width="400" height="300"><span class="recipe-tag">Snacks</span></div>
         <div class="recipe-body"><h3>Masala Buttermilk (Chaas)</h3><p>Beats bloating, cools the gut and stops you reaching for a cold drink.</p>
         <ul class="recipe-meta"><li>5 min</li><li>60 kcal</li><li>Debloat</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dinner">
-        <div class="recipe-img"><img src="assets/recipes/dinner-1.svg" alt="Paneer tikka bowl" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dinner-1.svg" alt="Paneer tikka bowl" loading="lazy" width="400" height="300"><span class="recipe-tag">Dinner</span></div>
         <div class="recipe-body"><h3>Grilled Paneer or Tofu Tikka Bowl</h3><p>Restaurant taste, home portions. Perfect for a light, high-protein dinner.</p>
         <ul class="recipe-meta"><li>25 min</li><li>320 kcal</li><li>High protein</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dinner">
-        <div class="recipe-img"><img src="assets/recipes/dinner-2.svg" alt="Lauki chana dal soup" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dinner-2.svg" alt="Lauki chana dal soup" loading="lazy" width="400" height="300"><span class="recipe-tag">Dinner</span></div>
         <div class="recipe-body"><h3>Lauki &amp; Chana Dal Soup with Roti</h3><p>Warm, filling and easy on digestion &mdash; our most-requested winter dinner.</p>
         <ul class="recipe-meta"><li>30 min</li><li>290 kcal</li><li>Light dinner</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dinner">
-        <div class="recipe-img"><img src="assets/recipes/dinner-3.svg" alt="Quinoa curry bowl" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dinner-3.svg" alt="Quinoa curry bowl" loading="lazy" width="400" height="300"><span class="recipe-tag">Dinner</span></div>
         <div class="recipe-body"><h3>Soya or Fish Curry with Quinoa</h3><p>Big flavour, balanced macros. Works for both veg and non-veg plans.</p>
         <ul class="recipe-meta"><li>30 min</li><li>340 kcal</li><li>Balanced</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dinner">
-        <div class="recipe-img"><img src="assets/recipes/dinner-4.svg" alt="Millet khichdi" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dinner-4.svg" alt="Millet khichdi" loading="lazy" width="400" height="300"><span class="recipe-tag">Dinner</span></div>
         <div class="recipe-body"><h3>Millet Khichdi with Stir-fried Veggies</h3><p>Comfort food that still fits the plan. Gentle on the gut, heavy on fibre.</p>
         <ul class="recipe-meta"><li>25 min</li><li>300 kcal</li><li>One pot</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dessert">
-        <div class="recipe-img"><img src="assets/recipes/dessert-1.svg" alt="Date and walnut bites" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dessert-1.svg" alt="Date and walnut bites" loading="lazy" width="400" height="300"><span class="recipe-tag">Dessert</span></div>
         <div class="recipe-body"><h3>Date &amp; Walnut Energy Bites</h3><p>No sugar, no ghee-loaded mithai &mdash; three ingredients and a blender.</p>
         <ul class="recipe-meta"><li>15 min</li><li>90 kcal</li><li>No sugar</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dessert">
-        <div class="recipe-img"><img src="assets/recipes/dessert-2.svg" alt="Yogurt parfait" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dessert-2.svg" alt="Yogurt parfait" loading="lazy" width="400" height="300"><span class="recipe-tag">Dessert</span></div>
         <div class="recipe-body"><h3>Greek Yogurt Berry Parfait</h3><p>Creamy, sweet and packed with protein. Dessert that works with your goal.</p>
         <ul class="recipe-meta"><li>5 min</li><li>140 kcal</li><li>High protein</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dessert">
-        <div class="recipe-img"><img src="assets/recipes/dessert-3.svg" alt="Ragi banana pancake bites" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dessert-3.svg" alt="Ragi banana pancake bites" loading="lazy" width="400" height="300"><span class="recipe-tag">Dessert</span></div>
         <div class="recipe-body"><h3>Ragi Banana Pancake Bites</h3><p>Calcium-rich and naturally sweet. The kids will finish these before you do.</p>
         <ul class="recipe-meta"><li>20 min</li><li>160 kcal</li><li>Kid approved</li></ul></div>
       </article>
 
       <article class="recipe reveal" data-cat="dessert">
-        <div class="recipe-img"><img src="assets/recipes/dessert-4.svg" alt="Dark chocolate chia pudding" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-img"><img src="assets/recipes/dessert-4.svg" alt="Dark chocolate chia pudding" loading="lazy" width="400" height="300"><span class="recipe-tag">Dessert</span></div>
         <div class="recipe-body"><h3>Dark Chocolate Chia Pudding</h3><p>For the chocolate craving that shows up right before your period.</p>
         <ul class="recipe-meta"><li>5 min</li><li>150 kcal</li><li>Craving fix</li></ul></div>
       </article>
@@ -349,7 +350,7 @@
     </div>
 
     <div class="slider reveal">
-      <div class="slider-track" id="sliderTrack">
+      <div class="slider-track" id="sliderTrack" data-lenis-prevent="true">
 
         <article class="quote">
           <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
@@ -397,9 +398,40 @@
 
     <h3 class="mini-head reveal">Transformations from the Nutrinance family</h3>
     <div class="transform-grid">
-      <figure class="transform reveal"><img src="assets/photos/transform-1.svg" alt="Client transformation" loading="lazy"><figcaption><strong>-12 kg in 6 months</strong><span>PCOS weight loss</span></figcaption></figure>
-      <figure class="transform reveal"><img src="assets/photos/transform-2.svg" alt="Client transformation" loading="lazy"><figcaption><strong>-8 inches off the waist</strong><span>Inch loss plan</span></figcaption></figure>
-      <figure class="transform reveal"><img src="assets/photos/transform-3.svg" alt="Client transformation" loading="lazy"><figcaption><strong>+6 kg healthy weight</strong><span>Adult weight gain</span></figcaption></figure>
+      <figure class="transform reveal"><img src="assets/photos/transform-1.svg" alt="Client transformation" loading="lazy" width="360" height="360"><figcaption><strong>-12 kg in 6 months</strong><span>PCOS weight loss</span></figcaption></figure>
+      <figure class="transform reveal"><img src="assets/photos/transform-2.svg" alt="Client transformation" loading="lazy" width="360" height="360"><figcaption><strong>-8 inches off the waist</strong><span>Inch loss plan</span></figcaption></figure>
+      <figure class="transform reveal"><img src="assets/photos/transform-3.svg" alt="Client transformation" loading="lazy" width="360" height="360"><figcaption><strong>+6 kg healthy weight</strong><span>Adult weight gain</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTAGRAM COMMUNITY ================= -->
+<section class="section insta-community" id="community">
+  <div class="container">
+    <div class="insta-box reveal">
+      <div class="insta-content">
+        <div class="insta-badge-wrap">
+          <span class="insta-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>25.9K+ Instagram family</span>
+          </span>
+          <span class="insta-handle">@nutrinance.wellbeing</span>
+        </div>
+        <h2>Join our vibrant wellness circle</h2>
+        <p class="insta-lead">Daily Desi meal plans, portion swaps, hormone balance tips &amp; real client stories</p>
+        <div class="insta-pills">
+          <span class="insta-pill">🥗 100+ Desi Recipes</span>
+          <span class="insta-pill">✨ Hormone Balance Guides</span>
+          <span class="insta-pill">📊 Real Client Transformations</span>
+          <span class="insta-pill">💬 Daily Wellness Q&amp;As</span>
+        </div>
+      </div>
+      <div class="insta-action">
+        <a href="https://www.instagram.com/nutrinance.wellbeing" target="_blank" rel="noopener" class="btn btn-insta" aria-label="Follow Nutrinance on Instagram">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Follow on Instagram
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -435,11 +467,11 @@
         <li><span>&#10003;</span> Reply usually within a few hours</li>
       </ul>
     </div>
-    <form class="book-form reveal" id="bookForm" novalidate>
-      <label>Your name<input type="text" id="bName" placeholder="e.g. Ananya Shah" required></label>
-      <label>Age<input type="number" id="bAge" min="1" max="110" placeholder="e.g. 29"></label>
-      <label>What do you need help with?
-        <select id="bGoal">
+    <form class="book-form reveal" id="bookForm" novalidate aria-label="Book a consultation form">
+      <label for="bName">Your name <span class="req" aria-hidden="true">*</span><input type="text" id="bName" placeholder="e.g. Ananya Shah" required aria-required="true" aria-invalid="false"></label>
+      <label for="bAge">Age<input type="number" id="bAge" min="1" max="110" placeholder="e.g. 29" aria-invalid="false"></label>
+      <label for="bGoal">What do you need help with?
+        <select id="bGoal" aria-invalid="false">
           <option>Weight loss</option>
           <option>PCOS / PCOD</option>
           <option>Thyroid</option>
@@ -452,7 +484,8 @@
           <option>Not sure yet</option>
         </select>
       </label>
-      <label>Anything else we should know?<textarea id="bNote" rows="3" placeholder="Reports, medication, allergies, timeline..."></textarea></label>
+      <label for="bNote">Anything else we should know?<textarea id="bNote" rows="3" placeholder="Reports, medication, allergies, timeline..." aria-invalid="false"></textarea></label>
+      <div id="formStatus" class="sr-only form-status" aria-live="polite" aria-atomic="true"></div>
       <button type="submit" class="btn btn-wa btn-lg btn-block">Send on WhatsApp</button>
       <small class="form-note">Opens WhatsApp with your message pre-filled. Nothing is stored on this site.</small>
     </form>
@@ -506,6 +539,16 @@
   <svg viewBox="0 0 24 24" width="27" height="27" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.05c-.25.69-1.46 1.32-2 1.36-.51.04-1.16.06-1.87-.12-.43-.13-.98-.32-1.69-.62-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.6-1.21-3.06s.77-2.17 1.04-2.47c.27-.3.59-.37.79-.37h.57c.18 0 .43-.07.67.51.25.6.85 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.12.07.72-.18 1.41Z"/></svg>
   <span>Chat with us</span>
 </a>
+
+<!-- Vendor Scripts (Local with CDN Fallback) -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script>window.gsap || document.write('<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"><\/script>');</script>
+
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script>window.ScrollTrigger || document.write('<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"><\/script>');</script>
+
+<script src="assets/vendor/lenis.min.js"></script>
+<script>window.Lenis || document.write('<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"><\/script>');</script>
 
 <script src="script.js"></script>
 </body>
