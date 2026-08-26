@@ -1,0 +1,1140 @@
+<title>Nutrinance Wellbeing</title>
+<meta name="description" content="Customised desi diet plans for weight loss, weight gain and hormonal health.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   NUTRINANCE — one-page site
+   Palette: green + pink + white
+   ============================================================ */
+:root{
+  --green-900:#12362A;
+  --green-800:#173F30;
+  --green-700:#1F5A40;
+  --green-600:#26714F;
+  --green-500:#2E8B5F;
+  --green-300:#8FCFAE;
+  --green-100:#E2F2E9;
+  --green-50:#F1F9F4;
+
+  --pink-700:#B8456B;
+  --pink-600:#D2688A;
+  --pink-400:#F0A4BC;
+  --pink-200:#FBD9E3;
+  --pink-50:#FDF2F6;
+
+  --white:#FFFFFF;
+  --cream:#FFFCFA;
+  --ink:#1B2A23;
+  --muted:#5E6F66;
+  --line:#E8EDE9;
+  --wa:#25D366;
+  --wa-dark:#1DA851;
+
+  --r-sm:12px; --r:18px; --r-lg:26px; --r-xl:34px;
+  --sh-sm:0 2px 10px rgba(18,54,42,.06);
+  --sh:0 14px 40px rgba(18,54,42,.09);
+  --sh-lg:0 26px 70px rgba(18,54,42,.14);
+  --max:1180px;
+  --font-d:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-b:"Plus Jakarta Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--font-b);font-size:17px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--font-d);font-weight:600;line-height:1.14;letter-spacing:-.02em;margin:0 0 .5em}
+h1{font-size:clamp(2.4rem,5.4vw,4.05rem)}
+h2{font-size:clamp(1.95rem,3.7vw,2.9rem)}
+h3{font-size:1.2rem;letter-spacing:-.01em}
+p{margin:0 0 1rem}
+em{font-style:italic;color:var(--green-500)}
+.container{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:24px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 26px;border-radius:999px;border:1.5px solid transparent;
+  font-weight:600;font-size:.95rem;cursor:pointer;white-space:nowrap;
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-lg{padding:16px 34px;font-size:1rem}
+.btn-block{width:100%}
+.btn-primary{background:var(--green-700);color:#fff;box-shadow:0 10px 26px rgba(31,90,64,.26)}
+.btn-primary:hover{background:var(--green-800);box-shadow:0 16px 34px rgba(31,90,64,.32)}
+.btn-pink{background:var(--pink-600);color:#fff;box-shadow:0 10px 26px rgba(210,104,138,.3)}
+.btn-pink:hover{background:var(--pink-700)}
+.btn-ghost{background:transparent;color:var(--green-800);border-color:var(--green-300)}
+.btn-ghost:hover{background:var(--green-100);border-color:var(--green-500)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 10px 26px rgba(37,211,102,.3)}
+.btn-wa:hover{background:var(--wa-dark)}
+
+/* ---------- topbar + header ---------- */
+.topbar{background:var(--green-800);color:#EAF6EF;text-align:center;font-size:.83rem;letter-spacing:.01em}
+.topbar p{margin:0;padding:9px 18px}
+.site-header{position:sticky;top:0;z-index:60;background:rgba(255,252,250,.86);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:box-shadow .3s,border-color .3s}
+.site-header.is-stuck{box-shadow:0 6px 26px rgba(18,54,42,.08);border-bottom-color:var(--line)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:78px}
+.brand img{height:46px;width:auto}
+.nav{display:flex;align-items:center;gap:30px}
+.nav>a{font-size:.94rem;font-weight:500;color:var(--green-900);position:relative;padding:6px 0;transition:color .2s}
+.nav>a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--pink-600);border-radius:2px;transition:width .26s ease}
+.nav>a:hover{color:var(--green-600)}
+.nav>a:hover::after,.nav>a.active::after{width:100%}
+.nav-cta{margin-left:6px}
+.nav-cta::after{display:none}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:46px;height:44px;border:1.5px solid var(--line);background:#fff;border-radius:13px;cursor:pointer;padding:0 11px}
+.hamburger span{height:2px;background:var(--green-800);border-radius:2px;transition:transform .28s,opacity .2s}
+.hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.is-open span:nth-child(2){opacity:0}
+.hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:70px 0 90px;overflow:hidden;
+  background:radial-gradient(120% 90% at 88% 0%,var(--pink-50) 0%,rgba(253,242,246,0) 55%),
+             radial-gradient(90% 80% at 4% 12%,var(--green-50) 0%,rgba(241,249,244,0) 60%)}
+.blob{position:absolute;border-radius:50%;filter:blur(8px);opacity:.5;pointer-events:none}
+.blob-1{width:420px;height:420px;background:radial-gradient(circle at 30% 30%,var(--green-100),transparent 68%);top:-110px;left:-130px}
+.blob-2{width:520px;height:520px;background:radial-gradient(circle at 60% 40%,var(--pink-200),transparent 66%);bottom:-200px;right:-160px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--green-100);color:var(--green-700);
+  padding:8px 17px;border-radius:999px;font-size:.82rem;font-weight:600;letter-spacing:.03em;box-shadow:var(--sh-sm);margin-bottom:22px}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pink-600);box-shadow:0 0 0 4px var(--pink-200)}
+.hero h1{margin-bottom:20px}
+.hero h1 em{color:var(--pink-600)}
+.lead{font-size:1.09rem;color:var(--muted);max-width:53ch;margin-bottom:30px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px}
+.hero-stats{display:flex;gap:38px;list-style:none;margin:0;padding:26px 0 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.hero-stats strong{display:block;font-family:var(--font-d);font-size:1.75rem;color:var(--green-700);line-height:1.1}
+.hero-stats span{font-size:.83rem;color:var(--muted)}
+.hero-stats .star{color:var(--pink-600);font-size:1.2rem}
+
+.hero-media{position:relative;min-height:480px}
+.hero-img-main{border-radius:200px 200px var(--r-xl) var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);aspect-ratio:4/5;max-width:400px;margin-left:auto}
+.hero-img-main img{width:100%;height:100%;object-fit:cover}
+.hero-img-sub{position:absolute;left:0;bottom:34px;width:172px;aspect-ratio:1;border-radius:var(--r-lg);overflow:hidden;border:6px solid #fff;box-shadow:var(--sh)}
+.hero-img-sub img{width:100%;height:100%;object-fit:cover}
+.float-card{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:13px 18px;box-shadow:var(--sh);animation:bob 5s ease-in-out infinite}
+.float-card strong{display:block;font-size:.87rem}
+.float-card small{font-size:.74rem;color:var(--muted)}
+.fc-icon{font-size:1.4rem}
+.float-card-1{top:26px;left:-6px}
+.float-card-2{bottom:-14px;right:6px;animation-delay:1.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--green-800);color:#DFF1E7;overflow:hidden;padding:15px 0}
+.marquee-track{display:flex;gap:26px;white-space:nowrap;width:max-content;animation:slide 34s linear infinite;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase}
+.marquee-track i{color:var(--pink-400);font-style:normal}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- section shell ---------- */
+.section{padding:96px 0}
+.section-tint{background:linear-gradient(180deg,var(--green-50),var(--white))}
+.section-head{max-width:660px;margin:0 auto 52px;text-align:center}
+.section-head p{color:var(--muted);font-size:1.03rem}
+.eyebrow{display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--green-600);background:var(--green-100);padding:6px 15px;border-radius:999px;margin-bottom:16px}
+.eyebrow-pink{color:var(--pink-700);background:var(--pink-200)}
+.eyebrow-light{color:#fff;background:rgba(255,255,255,.18)}
+.mini-head{text-align:center;font-size:1.5rem;margin:70px 0 30px}
+
+/* ---------- who we help ---------- */
+.who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.who-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:32px 26px;text-align:center;
+  transition:transform .3s,box-shadow .3s,border-color .3s}
+.who-card:hover{transform:translateY(-8px);box-shadow:var(--sh);border-color:var(--green-300)}
+.who-emoji{font-size:2.4rem;display:block;margin-bottom:14px}
+.who-card h3{margin-bottom:8px}
+.who-card p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* ---------- story ---------- */
+.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.story-media{position:relative}
+.story-media img{width:100%;border-radius:var(--r-xl) var(--r-xl) 160px 160px;box-shadow:var(--sh-lg);aspect-ratio:4/5;object-fit:cover}
+.story-badge{position:absolute;right:-14px;bottom:44px;background:var(--pink-600);color:#fff;border-radius:20px;padding:16px 22px;text-align:center;box-shadow:var(--sh)}
+.story-badge strong{display:block;font-family:var(--font-d);font-size:1.5rem;line-height:1}
+.story-badge span{font-size:.76rem;opacity:.9}
+.story-copy .eyebrow{margin-bottom:14px}
+.story-copy p{color:var(--muted)}
+.story-copy strong{color:var(--ink)}
+.story-points{list-style:none;padding:0;margin:26px 0 30px;display:grid;gap:11px}
+.story-points li{display:flex;gap:12px;align-items:flex-start;font-size:.95rem}
+.story-points span{flex:none;width:23px;height:23px;border-radius:50%;background:var(--green-100);color:var(--green-600);
+  display:grid;place-items:center;font-size:.75rem;font-weight:700;margin-top:3px}
+
+/* ---------- programs ---------- */
+.tabs{display:flex;justify-content:center;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+.tab{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:12px 28px;font-weight:600;font-size:.94rem;cursor:pointer;transition:.24s}
+.tab:hover{border-color:var(--green-300);color:var(--green-700)}
+.tab.is-active{background:var(--green-700);border-color:var(--green-700);color:#fff;box-shadow:0 10px 24px rgba(31,90,64,.22)}
+.tab-panel{display:none}
+.tab-panel.is-active{display:block;animation:fadeUp .45s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:20px}
+.prog-grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.prog-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px 26px 26px;overflow:hidden;
+  transition:transform .3s,box-shadow .3s,border-color .3s}
+.prog-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--green-500),var(--pink-400));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.prog-card:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:transparent}
+.prog-card:hover::before{transform:scaleX(1)}
+.prog-num{font-family:var(--font-d);font-size:2.1rem;color:var(--pink-200);line-height:1;display:block;margin-bottom:8px;transition:color .3s}
+.prog-card:hover .prog-num{color:var(--pink-400)}
+.prog-card h3{margin-bottom:8px;font-size:1.14rem}
+.prog-card p{font-size:.9rem;color:var(--muted);margin-bottom:16px}
+.prog-card a{font-size:.86rem;font-weight:700;color:var(--green-600);cursor:pointer;transition:gap .2s,color .2s}
+.prog-card a:hover{color:var(--pink-600)}
+.prog-note{margin-top:34px;background:var(--green-50);border:1px dashed var(--green-300);border-radius:var(--r-lg);
+  padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.prog-note p{margin:0;color:var(--muted)}
+
+/* ---------- women's health ---------- */
+.women{background:linear-gradient(180deg,var(--pink-50),var(--white))}
+.women-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.women-card{background:#fff;border:1px solid var(--pink-200);border-radius:var(--r-lg);padding:30px 28px;position:relative;
+  transition:transform .3s,box-shadow .3s}
+.women-card::after{content:"";position:absolute;left:28px;top:0;width:34px;height:4px;border-radius:0 0 4px 4px;background:var(--pink-400)}
+.women-card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(210,104,138,.14)}
+.women-card h3{color:var(--pink-700);margin-bottom:9px}
+.women-card p{font-size:.92rem;color:var(--muted);margin:0}
+.women-cta{text-align:center;margin-top:44px}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px 24px;position:relative}
+.step-n{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--green-700);color:#fff;
+  font-family:var(--font-d);font-size:1.15rem;margin-bottom:16px}
+.step h3{font-size:1.1rem;margin-bottom:6px}
+.step p{font-size:.9rem;color:var(--muted);margin:0}
+.step:not(:last-child)::after{content:"";position:absolute;top:52px;right:-14px;width:16px;height:2px;background:var(--green-300)}
+
+/* ---------- recipes ---------- */
+.filters{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-bottom:40px}
+.filter{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:10px 24px;font-weight:600;font-size:.9rem;cursor:pointer;transition:.24s}
+.filter:hover{border-color:var(--pink-400);color:var(--pink-700)}
+.filter.is-active{background:var(--pink-600);border-color:var(--pink-600);color:#fff;box-shadow:0 8px 20px rgba(210,104,138,.26)}
+.recipe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.recipe{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .3s,box-shadow .3s}
+.recipe.is-hidden{display:none}
+.recipe:hover{transform:translateY(-7px);box-shadow:var(--sh)}
+.recipe-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+.recipe-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.recipe:hover .recipe-img img{transform:scale(1.07)}
+.recipe-tag{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.94);color:var(--green-700);
+  font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.recipe-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+.recipe-body h3{font-size:1.03rem;margin-bottom:7px}
+.recipe-body p{font-size:.87rem;color:var(--muted);margin-bottom:16px;flex:1}
+.recipe-meta{list-style:none;display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:0}
+.recipe-meta li{font-size:.72rem;font-weight:600;color:var(--green-700);background:var(--green-50);border:1px solid var(--green-100);
+  padding:4px 11px;border-radius:999px}
+.recipe-meta li:last-child{color:var(--pink-700);background:var(--pink-50);border-color:var(--pink-200)}
+.recipe-cta{margin-top:44px;text-align:center}
+.recipe-cta p{color:var(--muted);margin-bottom:16px}
+
+/* ---------- reviews ---------- */
+.rating-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:28px 24px;box-shadow:var(--sh-sm);margin-bottom:46px;text-align:center}
+.rating-bar>div+div{border-left:1px solid var(--line)}
+.rating-bar strong{display:block;font-family:var(--font-d);font-size:2rem;color:var(--green-700);line-height:1.1}
+.rating-bar small{display:block;font-size:.79rem;color:var(--muted)}
+.stars{color:var(--pink-600);letter-spacing:2px;font-size:.95rem}
+.slider{position:relative}
+.slider-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:6px 2px 22px;scrollbar-width:none}
+.slider-track::-webkit-scrollbar{display:none}
+.quote{flex:0 0 calc(33.333% - 15px);scroll-snap-align:start;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:30px 28px;display:flex;flex-direction:column;box-shadow:var(--sh-sm)}
+.quote .stars{margin-bottom:14px}
+.quote p{font-size:.95rem;color:var(--muted);flex:1;font-style:italic}
+.quote-by{display:flex;align-items:center;gap:13px;padding-top:16px;border-top:1px solid var(--line);margin-top:6px}
+.avatar{flex:none;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--green-300),var(--pink-400));
+  display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--font-d);font-size:1.1rem}
+.avatar::after{content:attr(data-initial)}
+.quote-by strong{display:block;font-size:.93rem}
+.quote-by small{font-size:.78rem;color:var(--muted)}
+.slider-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px}
+.s-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;
+  font-size:1.05rem;color:var(--green-700);transition:.24s}
+.s-btn:hover{background:var(--green-700);border-color:var(--green-700);color:#fff}
+.dots{display:flex;gap:7px}
+.dots button{width:8px;height:8px;padding:0;border:none;border-radius:50%;background:var(--green-100);cursor:pointer;transition:.25s}
+.dots button.is-active{background:var(--pink-600);width:24px;border-radius:999px}
+.transform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.transform{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;transition:transform .3s,box-shadow .3s}
+.transform:hover{transform:translateY(-6px);box-shadow:var(--sh)}
+.transform img{aspect-ratio:1;object-fit:cover;width:100%}
+.transform figcaption{padding:18px 20px}
+.transform strong{display:block;font-family:var(--font-d);font-size:1.15rem;color:var(--green-700)}
+.transform span{font-size:.82rem;color:var(--muted)}
+
+/* ---------- faq ---------- */
+.faq-wrap{max-width:840px}
+.accordion{display:grid;gap:12px}
+.accordion details{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:4px 24px;transition:box-shadow .25s,border-color .25s}
+.accordion details[open]{box-shadow:var(--sh-sm);border-color:var(--green-300)}
+.accordion summary{list-style:none;cursor:pointer;font-weight:600;padding:18px 34px 18px 0;position:relative;font-size:1rem}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary::after{content:"+";position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:1.5rem;
+  color:var(--pink-600);font-weight:400;transition:transform .25s}
+.accordion details[open] summary::after{content:"\2013"}
+.accordion p{color:var(--muted);font-size:.94rem;padding-bottom:18px;margin:0}
+
+/* ---------- book ---------- */
+.book{background:linear-gradient(135deg,var(--green-800),var(--green-600) 58%,var(--green-700));color:#fff;position:relative;overflow:hidden}
+.book::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,164,188,.28),transparent 66%);top:-190px;right:-140px}
+.book-inner{position:relative;display:grid;grid-template-columns:1fr .9fr;gap:56px;align-items:center}
+.book-copy h2{color:#fff}
+.book-copy p{color:#D6EADF}
+.book-points{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:11px}
+.book-points li{display:flex;gap:12px;align-items:center;font-size:.95rem;color:#EAF6EF}
+.book-points span{flex:none;width:23px;height:23px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;font-size:.72rem}
+.book-form{background:#fff;border-radius:var(--r-xl);padding:34px;box-shadow:var(--sh-lg);display:grid;gap:15px}
+.book-form label{display:block;font-size:.83rem;font-weight:600;color:var(--green-800)}
+.book-form input,.book-form select,.book-form textarea{
+  width:100%;margin-top:7px;padding:13px 15px;border:1.5px solid var(--line);border-radius:13px;
+  background:var(--green-50);font-size:.95rem;transition:border-color .2s,background .2s;resize:vertical}
+.book-form input:focus,.book-form select:focus,.book-form textarea:focus{outline:none;border-color:var(--green-500);background:#fff}
+.book-form input.err{border-color:var(--pink-600);background:var(--pink-50)}
+.form-note{display:block;text-align:center;font-size:.76rem;color:var(--muted)}
+
+/* ---------- footer ---------- */
+.footer{background:var(--green-900);color:#C9DED3;padding:70px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}
+.footer-brand img{height:52px;width:auto;margin-bottom:18px}
+.footer-brand p{font-size:.9rem;max-width:34ch}
+.socials{display:flex;gap:12px;margin-top:16px}
+.socials a{font-size:.82rem;font-weight:600;color:#fff;border:1px solid rgba(255,255,255,.2);padding:8px 18px;border-radius:999px;cursor:pointer;transition:.24s}
+.socials a:hover{background:var(--pink-600);border-color:var(--pink-600)}
+.footer-col h4{color:#fff;font-size:1rem;margin-bottom:14px}
+.footer-col a{display:block;font-size:.9rem;padding:5px 0;cursor:pointer;transition:color .2s,transform .2s}
+.footer-col a:hover{color:var(--pink-400);transform:translateX(3px)}
+.tiny{font-size:.78rem;opacity:.72}
+.footer-bottom{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem}
+.footer-bottom p{margin:0}
+
+/* ---------- floating whatsapp ---------- */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:70;display:flex;align-items:center;gap:0;
+  background:var(--wa);color:#fff;border-radius:999px;padding:15px;box-shadow:0 12px 30px rgba(37,211,102,.42);
+  cursor:pointer;transition:gap .3s,padding .3s,background .25s;overflow:hidden}
+.wa-float span{max-width:0;white-space:nowrap;font-weight:600;font-size:.92rem;opacity:0;transition:max-width .35s,opacity .3s}
+.wa-float:hover{background:var(--wa-dark);gap:9px;padding-right:22px}
+.wa-float:hover span{max-width:140px;opacity:1}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(22px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,.8,.3,1),transform .7s cubic-bezier(.22,.8,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1080px){
+  .recipe-grid{grid-template-columns:repeat(3,1fr)}
+  .quote{flex:0 0 calc(50% - 11px)}
+  .nav{gap:20px}
+  .nav>a{font-size:.88rem}
+}
+@media (max-width:960px){
+  .section{padding:76px 0}
+  .hero{padding:52px 0 74px}
+  .hero-grid{grid-template-columns:1fr;gap:52px}
+  .hero-media{max-width:460px;margin-inline:auto;min-height:auto}
+  .hero-img-main{margin-inline:auto}
+  .story-grid{grid-template-columns:1fr;gap:44px}
+  .story-media{max-width:420px;margin-inline:auto}
+  .book-inner{grid-template-columns:1fr;gap:36px}
+  .who-grid{grid-template-columns:repeat(2,1fr)}
+  .women-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step::after{display:none}
+  .transform-grid{grid-template-columns:repeat(3,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:34px}
+}
+@media (max-width:820px){
+  .hamburger{display:flex}
+  .nav{
+    position:fixed;inset:0 0 0 auto;width:min(320px,86vw);background:#fff;flex-direction:column;
+    align-items:flex-start;justify-content:flex-start;gap:4px;padding:104px 30px 30px;
+    box-shadow:-16px 0 50px rgba(18,54,42,.16);transform:translateX(102%);transition:transform .34s cubic-bezier(.4,0,.2,1);
+  }
+  .nav.is-open{transform:none}
+  .nav>a{width:100%;font-size:1.02rem;padding:13px 0;border-bottom:1px solid var(--line)}
+  .nav>a::after{display:none}
+  .nav-cta{margin:20px 0 0;width:100%;border-bottom:none!important}
+  body.nav-open{overflow:hidden}
+  .nav-backdrop{position:fixed;inset:0;background:rgba(18,54,42,.4);z-index:55;opacity:0;pointer-events:none;transition:opacity .3s}
+  .nav-backdrop.is-on{opacity:1;pointer-events:auto}
+  .recipe-grid{grid-template-columns:repeat(2,1fr)}
+  .rating-bar{grid-template-columns:repeat(2,1fr);gap:22px}
+  .rating-bar>div+div{border-left:none}
+  .rating-bar>div:nth-child(n+3){border-top:1px solid var(--line);padding-top:20px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .container{padding-inline:18px}
+  .section{padding:62px 0}
+  .section-head{margin-bottom:38px}
+  .who-grid,.women-grid,.steps,.transform-grid,.recipe-grid{grid-template-columns:1fr}
+  .quote{flex:0 0 88%}
+  .hero-stats{gap:24px}
+  .hero-actions .btn{width:100%}
+  .hero-img-sub{width:130px;bottom:12px;left:-4px}
+  .float-card-1{top:10px;left:-10px;padding:10px 14px}
+  .float-card-2{bottom:-20px;right:-6px;padding:10px 14px}
+  .story-badge{right:0;bottom:-18px}
+  .prog-note{flex-direction:column;align-items:flex-start}
+  .book-form{padding:24px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:left}
+  .wa-float{right:14px;bottom:14px;padding:14px}
+  .wa-float:hover span{max-width:0;opacity:0}
+  .wa-float:hover{padding:14px;gap:0}
+  .marquee-track{font-size:.8rem}
+}
+
+</style>
+<!-- ================= ANNOUNCEMENT ================= -->
+<div class="topbar">
+  <p>✨ Now accepting new clients for September — free 15-min discovery call on WhatsApp</p>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="#top" class="brand" aria-label="Nutrinance home">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgMTEwIiB3aWR0aD0iNDIwIiBoZWlnaHQ9IjExMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJOdXRyaW5hbmNlIFdlbGxiZWluZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxlYWYiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM0Q5RTZFIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMUY1QTQwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LDEyKSI+CiAgICA8Y2lyY2xlIGN4PSI0MyIgY3k9IjQzIiByPSI0MyIgZmlsbD0iI0U0RjNFQSIvPgogICAgPHBhdGggZD0iTTQzIDc2YzAtMjIgOC0zNiAzMC00NC00IDI2LTE0IDM5LTMwIDQ0eiIgZmlsbD0iIzJFOEI1RiIvPgogICAgPHBhdGggZD0iTTQzIDc2QzQzIDUwIDMzIDM1IDEyIDI4YzMgMjcgMTQgNDIgMzEgNDh6IiBmaWxsPSIjMUY1QTQwIi8+CiAgICA8cGF0aCBkPSJNNDMgNzhWNDQiIHN0cm9rZT0iIzE1M0EyQSIgc3Ryb2tlLXdpZHRoPSIzLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNDMiIGN5PSIyNCIgcj0iOSIgZmlsbD0iI0QyNjg4QSIvPgogICAgPGNpcmNsZSBjeD0iNDMiIGN5PSIyNCIgcj0iMy40IiBmaWxsPSIjRkJEOUUzIi8+CiAgPC9nPgogIDx0ZXh0IHg9IjEwNCIgeT0iNTgiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCdUaW1lcyBOZXcgUm9tYW4nLHNlcmlmIiBmb250LXNpemU9IjQwIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMTUzQTJBIiBsZXR0ZXItc3BhY2luZz0iLTAuNSI+TnV0cmluYW5jZTwvdGV4dD4KICA8dGV4dCB4PSIxMDYiIHk9IjgyIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiNEMjY4OEEiIGxldHRlci1zcGFjaW5nPSI1LjYiPldFTExCRUlORzwvdGV4dD4KPC9zdmc+Cg==" alt="Nutrinance — Wellbeing" width="200" height="52">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#story">Our Story</a>
+      <a href="#programs">Programs</a>
+      <a href="#women">Women's Health</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-wa nav-cta" data-wa="Hi Vrushika! I found Nutrinance online and I'd like to book a consultation.">
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.05c-.25.69-1.46 1.32-2 1.36-.51.04-1.16.06-1.87-.12-.43-.13-.98-.32-1.69-.62-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.6-1.21-3.06s.77-2.17 1.04-2.47c.27-.3.59-.37.79-.37h.57c.18 0 .43-.07.67.51.25.6.85 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.12.07.72-.18 1.41Z"/></svg>
+        Book on WhatsApp
+      </a>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <span class="blob blob-1"></span>
+  <span class="blob blob-2"></span>
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="pill"><span class="dot"></span> Customised Desi Diet Plans</span>
+      <h1>Eat the food you <em>love</em>.<br>Become the healthiest <em>you</em>.</h1>
+      <p class="lead">No crash diets. No boring salads. Nutrinance builds realistic Indian meal plans around your body, your kitchen and your goals — whether that's losing weight, gaining it, or finally getting your hormones on your side.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" data-wa="Hi Vrushika! I'd like to book my free 15-minute discovery call.">Book a free discovery call</a>
+        <a class="btn btn-ghost btn-lg" href="#programs">Explore programs</a>
+      </div>
+      <ul class="hero-stats">
+        <li><strong>2,500+</strong><span>Happy clients</span></li>
+        <li><strong>25.9K</strong><span>Instagram family</span></li>
+        <li><strong>4.9<span class="star">★</span></strong><span>Average rating</span></li>
+      </ul>
+    </div>
+
+    <div class="hero-media reveal">
+      <div class="hero-img-main">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjExMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IllvdXIgcGhvdG8gaGVyZSI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0YwQTRCQyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJFOEI1RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI5MCIgcj0iMTMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMTAiLz4KPGNpcmNsZSBjeD0iNzAiIGN5PSI1MjAiIHI9IjEwNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA5Ii8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjI1MCIgcj0iODYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNCIvPjxwYXRoIGQ9Ik0xNTggNDcwYzAtODYgNjQtMTQwIDE0Mi0xNDBzMTQyIDU0IDE0MiAxNDB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMyIvPgo8dGV4dCB4PSIzMDAiIHk9IjU1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45MiI+WW91ciBwaG90byBoZXJlPC90ZXh0Pgo8L3N2Zz4K" alt="Vrushika, founder of Nutrinance" loading="eager">
+      </div>
+      <div class="hero-img-sub">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iTWVhbCBwaG90byI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzJFOEI1RiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE1M0EyQSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI5MCIgcj0iMTMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMTAiLz4KPGNpcmNsZSBjeD0iNzAiIGN5PSI1MjAiIHI9IjEwNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA5Ii8+CjxwYXRoIGQ9Ik0xNTAgMzAwaDMwMGExNTAgMTUwIDAgMCAxLTMwMCAweiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM4Ii8+PHBhdGggZD0iTTE1MCAzMDBoMzAwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTQiIG9wYWNpdHk9Ii41NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iMjQ1IiBjeT0iMjU1IiByPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMiLz48Y2lyY2xlIGN4PSIzMTUiIGN5PSIyNDAiIHI9IjE4IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMjYiLz48Y2lyY2xlIGN4PSIzNzAiIGN5PSIyNjIiIHI9IjIyIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMjIiLz4KPHRleHQgeD0iMzAwIiB5PSI1NTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTIiPk1lYWwgcGhvdG88L3RleHQ+Cjwvc3ZnPgo=" alt="A balanced Indian meal bowl" loading="lazy">
+      </div>
+      <div class="float-card float-card-1">
+        <span class="fc-icon">🥗</span>
+        <div><strong>Desi meal plans</strong><small>Roti, rice, dal — all included</small></div>
+      </div>
+      <div class="float-card float-card-2">
+        <span class="fc-icon">💬</span>
+        <div><strong>Daily WhatsApp support</strong><small>Never diet alone</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Weight Loss</span><i>•</i><span>PCOS &amp; PCOD Care</span><i>•</i><span>Thyroid Support</span><i>•</i><span>Post-Pregnancy Recovery</span><i>•</i><span>Diabetes Nutrition</span><i>•</i><span>Kids' Nutrition</span><i>•</i><span>Bridal Plans</span><i>•</i><span>Detox</span><i>•</i>
+    <span>Weight Loss</span><i>•</i><span>PCOS &amp; PCOD Care</span><i>•</i><span>Thyroid Support</span><i>•</i><span>Post-Pregnancy Recovery</span><i>•</i><span>Diabetes Nutrition</span><i>•</i><span>Kids' Nutrition</span><i>•</i><span>Bridal Plans</span><i>•</i><span>Detox</span><i>•</i>
+  </div>
+</div>
+
+<!-- ================= WHO WE HELP ================= -->
+<section class="section" id="who">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nutrition for every age</span>
+      <h2>One family. One kitchen. <em>Four different plans.</em></h2>
+      <p>Your toddler doesn't need what your father needs. We build separate, age-appropriate plans for everyone at home — so nobody feels left out at the dining table.</p>
+    </div>
+    <div class="who-grid">
+      <article class="who-card reveal">
+        <span class="who-emoji">👩</span>
+        <h3>Women</h3>
+        <p>Hormone-friendly nutrition for PCOS, thyroid, fertility, pregnancy, postpartum and menopause.</p>
+      </article>
+      <article class="who-card reveal">
+        <span class="who-emoji">👨</span>
+        <h3>Men</h3>
+        <p>Fat loss, muscle gain, cholesterol, blood pressure and desk-job metabolism — without giving up your favourites.</p>
+      </article>
+      <article class="who-card reveal">
+        <span class="who-emoji">🧒</span>
+        <h3>Kids</h3>
+        <p>Lunchbox plans, healthy weight gain, fussy-eater strategies and immunity-building everyday meals.</p>
+      </article>
+      <article class="who-card reveal">
+        <span class="who-emoji">🍼</span>
+        <h3>Toddlers</h3>
+        <p>Weaning charts, first foods, growth-stage feeding and gentle guidance for new parents.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OUR STORY ================= -->
+<section class="section section-tint" id="story">
+  <div class="container story-grid">
+    <div class="story-media reveal">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjkwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iVnJ1c2hpa2EiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFODhDQTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCODQ1NkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyNTAiIHI9Ijg2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMzQiLz48cGF0aCBkPSJNMTU4IDQ3MGMwLTg2IDY0LTE0MCAxNDItMTQwczE0MiA1NCAxNDIgMTQweiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMiLz4KPHRleHQgeD0iMzAwIiB5PSI1NTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTIiPlZydXNoaWthPC90ZXh0Pgo8L3N2Zz4K" alt="Vrushika, founder of Nutrinance">
+      <div class="story-badge">
+        <strong>8+ years</strong>
+        <span>of clinical practice</span>
+      </div>
+    </div>
+    <div class="story-copy reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2>Nutrinance was born from a simple frustration.</h2>
+      <p>Every diet plan I came across asked people to give up the food they grew up with. Quinoa instead of khichdi. Salads instead of sabzi. It worked for two weeks &mdash; and then real life happened.</p>
+      <p>So I built something different. <strong>Nutrinance</strong> is nutrition that lives inside your own kitchen: your family&rsquo;s recipes, your festivals, your budget, your work hours. We adjust the food you already eat instead of replacing it &mdash; which is exactly why our clients actually stay consistent.</p>
+      <p>Today we work with women managing PCOS, new mothers rebuilding strength, kids who refuse vegetables, and grandparents who want to stay independent. Different goals, same belief: <em>healthy should feel like home.</em></p>
+      <ul class="story-points">
+        <li><span>&#10003;</span> Qualified Clinical Dietitian &amp; Nutritionist</li>
+        <li><span>&#10003;</span> Specialist in PCOS, thyroid &amp; metabolic health</li>
+        <li><span>&#10003;</span> 100% customised &mdash; never a copy-paste chart</li>
+        <li><span>&#10003;</span> Plans for every age, from toddlers to seniors</li>
+      </ul>
+      <a class="btn btn-primary" data-wa="Hi Vrushika! I read your story on the Nutrinance website and I would love to work with you.">Work with Vrushika</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAMS ================= -->
+<section class="section" id="programs">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Programs</span>
+      <h2>Find the plan built for <em>your</em> body</h2>
+      <p>Every program starts with a detailed assessment &mdash; medical history, lifestyle, food preferences and reports &mdash; before a single meal is planned.</p>
+    </div>
+
+    <div class="tabs reveal" role="tablist" aria-label="Program categories">
+      <button class="tab is-active" role="tab" aria-selected="true" data-tab="loss">Weight Loss Programs</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="gain">Weight Gain Programs</button>
+    </div>
+
+    <div class="tab-panel is-active" data-panel="loss">
+      <div class="prog-grid">
+        <article class="prog-card reveal"><span class="prog-num">01</span><h3>Normal Weight Loss</h3><p>A steady, sustainable fat-loss plan for anyone carrying extra weight &mdash; built around your regular home food.</p><a data-wa="Hi! I am interested in the Normal Weight Loss program.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">02</span><h3>Post-Pregnancy Weight Loss</h3><p>Gentle, lactation-safe nutrition that helps new mothers recover strength first and lose weight second.</p><a data-wa="Hi! I am interested in the Post-Pregnancy Weight Loss program.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">03</span><h3>PCOS / PCOD Weight Loss</h3><p>Insulin-friendly, anti-inflammatory eating designed to regulate cycles, reduce cravings and shift stubborn weight.</p><a data-wa="Hi! I am interested in the PCOS / PCOD Weight Loss program.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">04</span><h3>Thyroid Weight Loss</h3><p>Metabolism-supportive plans for hypo- and hyperthyroidism, timed correctly around your medication.</p><a data-wa="Hi! I am interested in the Thyroid Weight Loss program.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">05</span><h3>Diabetes Weight Loss</h3><p>Blood-sugar-first meal planning with smart carb pairing &mdash; so your sugars and your weight both come down.</p><a data-wa="Hi! I am interested in the Diabetes Weight Loss program.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">06</span><h3>Medical Condition Weight Loss</h3><p>Hypertension, fatty liver, cholesterol, kidney concerns, gut issues &mdash; plans co-ordinated with your doctor&rsquo;s advice.</p><a data-wa="Hi! I am interested in a weight loss plan for a medical condition.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">07</span><h3>Fat Loss Plan</h3><p>Body-recomposition focused: lose fat, protect muscle, and finally see the difference in how you look and feel.</p><a data-wa="Hi! I am interested in the Fat Loss Plan.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">08</span><h3>Inch Loss Plan</h3><p>For when the scale will not move but the clothes must fit &mdash; targeted nutrition, water balance and bloat control.</p><a data-wa="Hi! I am interested in the Inch Loss Plan.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">09</span><h3>Bridal Weight Loss</h3><p>A countdown plan for the big day &mdash; glowing skin, better energy and a fit that flatters, timed to your wedding date.</p><a data-wa="Hi! I am interested in the Bridal Weight Loss program.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">10</span><h3>Detox Plan</h3><p>A short, food-based reset to reduce bloating, improve digestion and rebuild healthy eating momentum.</p><a data-wa="Hi! I am interested in the Detox Plan.">Enquire &rarr;</a></article>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-panel="gain">
+      <div class="prog-grid prog-grid-3">
+        <article class="prog-card reveal"><span class="prog-num">01</span><h3>Weight Gain for Kids</h3><p>Nutrient-dense, kid-approved meals and lunchboxes that add healthy weight and height &mdash; without junk shortcuts.</p><a data-wa="Hi! I am interested in the Weight Gain plan for Kids.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">02</span><h3>Weight Gain for Adults</h3><p>Structured calorie surplus with the right protein split, so you gain strength and shape &mdash; not just numbers.</p><a data-wa="Hi! I am interested in the Weight Gain plan for Adults.">Enquire &rarr;</a></article>
+        <article class="prog-card reveal"><span class="prog-num">03</span><h3>Weight Gain for Seniors</h3><p>Easy-to-digest, appetite-friendly nutrition to rebuild muscle, bone strength and energy after 60.</p><a data-wa="Hi! I am interested in the Weight Gain plan for Senior Citizens.">Enquire &rarr;</a></article>
+      </div>
+      <div class="prog-note reveal">
+        <p><strong>Not sure which one fits?</strong> Send a message and we will recommend the right program after a quick chat about your goals and reports.</p>
+        <a class="btn btn-primary" data-wa="Hi Vrushika! I am not sure which program suits me. Can you help me choose?">Help me choose</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WOMENS HEALTH ================= -->
+<section class="section women" id="women">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow eyebrow-pink">Women&rsquo;s Health</span>
+      <h2>Your hormones are not the enemy. <em>Your diet plan was.</em></h2>
+      <p>A woman&rsquo;s body changes every decade &mdash; and nutrition should change with it. This is the work closest to our heart at Nutrinance.</p>
+    </div>
+    <div class="women-grid">
+      <article class="women-card reveal"><h3>PCOS &amp; PCOD</h3><p>Balance insulin, calm inflammation, regulate cycles and manage the acne, hair fall and weight that come with it.</p></article>
+      <article class="women-card reveal"><h3>Thyroid Health</h3><p>Iodine, selenium and iron balance, correct medicine timing, and the everyday foods that quietly work against your thyroid.</p></article>
+      <article class="women-card reveal"><h3>Pregnancy Nutrition</h3><p>Trimester-wise plans for healthy weight gain, gestational diabetes and the nutrients your baby needs most.</p></article>
+      <article class="women-card reveal"><h3>Post-Pregnancy Care</h3><p>Lactation-safe recovery meals that restore iron and calcium before easing into gentle, sustainable fat loss.</p></article>
+      <article class="women-card reveal"><h3>Period &amp; Gut Health</h3><p>Cramps, bloating, cravings and irregular cycles &mdash; mapped to what you eat across all four phases of your month.</p></article>
+      <article class="women-card reveal"><h3>Menopause &amp; After</h3><p>Protect bone density, manage the midlife weight shift and keep energy steady through hormonal transition.</p></article>
+    </div>
+    <div class="women-cta reveal">
+      <a class="btn btn-pink btn-lg" data-wa="Hi Vrushika! I would like to talk about a women&rsquo;s health plan (PCOS / thyroid / pregnancy).">Talk about my hormones</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="section section-tint" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Four simple steps to your plan</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="step-n">1</span><h3>Say hello</h3><p>Message us on WhatsApp and book your free 15-minute discovery call.</p></div>
+      <div class="step reveal"><span class="step-n">2</span><h3>Deep-dive assessment</h3><p>We review your medical history, reports, routine, food likes and dislikes in detail.</p></div>
+      <div class="step reveal"><span class="step-n">3</span><h3>Your custom plan</h3><p>You receive a week-by-week desi meal plan with portions, alternatives and recipes.</p></div>
+      <div class="step reveal"><span class="step-n">4</span><h3>Weekly check-ins</h3><p>We track, tweak and keep you accountable on WhatsApp until the goal is yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECIPES ================= -->
+<section class="section" id="recipes">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Recipes</span>
+      <h2>Weight-loss friendly food that <em>tastes like food</em></h2>
+      <p>Free recipes from our plans &mdash; light, filling, and made from ingredients already in your kitchen.</p>
+    </div>
+
+    <div class="filters reveal">
+      <button class="filter is-active" data-filter="all">All</button>
+      <button class="filter" data-filter="breakfast">Breakfast</button>
+      <button class="filter" data-filter="snacks">Snacks</button>
+      <button class="filter" data-filter="dinner">Dinner</button>
+      <button class="filter" data-filter="dessert">Dessert</button>
+    </div>
+
+    <div class="recipe-grid" id="recipeGrid">
+
+      <article class="recipe reveal" data-cat="breakfast">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iTW9vbmcgRGFsIENoaWxsYSI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzdGQzZBMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJFOEI1RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI5MCIgcj0iMTMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMTAiLz4KPGNpcmNsZSBjeD0iNzAiIGN5PSI1MjAiIHI9IjEwNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA5Ii8+CjxwYXRoIGQ9Ik0xNTAgMzAwaDMwMGExNTAgMTUwIDAgMCAxLTMwMCAweiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM4Ii8+PHBhdGggZD0iTTE1MCAzMDBoMzAwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTQiIG9wYWNpdHk9Ii41NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iMjQ1IiBjeT0iMjU1IiByPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMiLz48Y2lyY2xlIGN4PSIzMTUiIGN5PSIyNDAiIHI9IjE4IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMjYiLz48Y2lyY2xlIGN4PSIzNzAiIGN5PSIyNjIiIHI9IjIyIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMjIiLz4KPHRleHQgeD0iMzAwIiB5PSI1NTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTIiPk1vb25nIERhbCBDaGlsbGE8L3RleHQ+Cjwvc3ZnPgo=" alt="Moong dal chilla" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-body"><h3>Moong Dal Chilla with Mint Chutney</h3><p>Savoury lentil pancakes that keep you full till lunch. Zero maida, all protein.</p>
+        <ul class="recipe-meta"><li>15 min</li><li>210 kcal</li><li>High protein</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="breakfast">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iT3Zlcm5pZ2h0IE9hdHMiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFODhDQTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCODQ1NkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cGF0aCBkPSJNMjA1IDIxMGgxOTB2MTMwYTk1IDk1IDAgMCAxLTE5MCAweiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM2Ii8+PHBhdGggZD0iTTM5NSAyNDBoNDBhNDIgNDIgMCAwIDEgMCA4NGgtNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxNCIgb3BhY2l0eT0iLjQ1Ii8+PHBhdGggZD0iTTI1MCAxNjBjMCAyMi0yMiAyMi0yMiA0NE0zMDAgMTUwYzAgMjQtMjQgMjQtMjQgNDhNMzUwIDE2MGMwIDIyLTIyIDIyLTIyIDQ0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTEiIG9wYWNpdHk9Ii40IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHRleHQgeD0iMzAwIiB5PSI1NTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTIiPk92ZXJuaWdodCBPYXRzPC90ZXh0Pgo8L3N2Zz4K" alt="Overnight oats" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-body"><h3>Overnight Oats with Berries &amp; Chia</h3><p>Prep at night, grab at 8am. The easiest fix for skipped breakfasts.</p>
+        <ul class="recipe-meta"><li>5 min</li><li>240 kcal</li><li>Gut friendly</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="breakfast">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iVmVnZXRhYmxlIFBvaGEiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRThCNUYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNTNBMkEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIzMjAiIHI9IjE1MCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMzIwIiByPSIxMDQiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yNiIvPjxjaXJjbGUgY3g9IjI2NCIgY3k9IjI5MiIgcj0iMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzM2IiBjeT0iMzA2IiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI4Ii8+PGNpcmNsZSBjeD0iMjk2IiBjeT0iMzYyIiByPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI0Ii8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5WZWdldGFibGUgUG9oYTwvdGV4dD4KPC9zdmc+Cg==" alt="Vegetable poha" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-body"><h3>Vegetable Poha with Peanuts</h3><p>The classic, rebuilt &mdash; double the veggies, measured oil, added protein.</p>
+        <ul class="recipe-meta"><li>15 min</li><li>260 kcal</li><li>Iron rich</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="breakfast">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQmVzYW4gVG9hc3QiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGMEE0QkMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyRThCNUYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cGF0aCBkPSJNMTUwIDMwMGgzMDBhMTUwIDE1MCAwIDAgMS0zMDAgMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zOCIvPjxwYXRoIGQ9Ik0xNTAgMzAwaDMwMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE0IiBvcGFjaXR5PSIuNTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI0NSIgY3k9IjI1NSIgcj0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzE1IiBjeT0iMjQwIiByPSIxOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI2Ii8+PGNpcmNsZSBjeD0iMzcwIiBjeT0iMjYyIiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5CZXNhbiBUb2FzdDwvdGV4dD4KPC9zdmc+Cg==" alt="Besan toast" loading="lazy"><span class="recipe-tag">Breakfast</span></div>
+        <div class="recipe-body"><h3>Paneer &amp; Spinach Besan Toast</h3><p>A low-GI breakfast that keeps insulin steady &mdash; a PCOS favourite.</p>
+        <ul class="recipe-meta"><li>12 min</li><li>230 kcal</li><li>PCOS friendly</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="snacks">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQ2hhbmEgTWFraGFuYSBNaXgiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFODhDQTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCODQ1NkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cGF0aCBkPSJNMTUwIDMwMGgzMDBhMTUwIDE1MCAwIDAgMS0zMDAgMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zOCIvPjxwYXRoIGQ9Ik0xNTAgMzAwaDMwMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE0IiBvcGFjaXR5PSIuNTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI0NSIgY3k9IjI1NSIgcj0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzE1IiBjeT0iMjQwIiByPSIxOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI2Ii8+PGNpcmNsZSBjeD0iMzcwIiBjeT0iMjYyIiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5DaGFuYSBNYWtoYW5hIE1peDwvdGV4dD4KPC9zdmc+Cg==" alt="Roasted chana and makhana" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-body"><h3>Roasted Chana &amp; Makhana Trail Mix</h3><p>Your 5pm chips replacement. Crunchy, salty, and actually good for you.</p>
+        <ul class="recipe-meta"><li>10 min</li><li>130 kcal</li><li>Crunchy fix</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="snacks">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iSHVtbXVzIEJpdGVzIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjN0ZDNkEwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkU4QjVGIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CjxjaXJjbGUgY3g9IjUxMCIgY3k9IjkwIiByPSIxMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xMCIvPgo8Y2lyY2xlIGN4PSI3MCIgY3k9IjUyMCIgcj0iMTA1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMDkiLz4KPGNpcmNsZSBjeD0iMzAwIiBjeT0iMzIwIiByPSIxNTAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yMiIvPjxjaXJjbGUgY3g9IjMwMCIgY3k9IjMyMCIgcj0iMTA0IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMjYiLz48Y2lyY2xlIGN4PSIyNjQiIGN5PSIyOTIiIHI9IjMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMyIvPjxjaXJjbGUgY3g9IjMzNiIgY3k9IjMwNiIgcj0iMjIiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yOCIvPjxjaXJjbGUgY3g9IjI5NiIgY3k9IjM2MiIgcj0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yNCIvPgo8dGV4dCB4PSIzMDAiIHk9IjU1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45MiI+SHVtbXVzIEJpdGVzPC90ZXh0Pgo8L3N2Zz4K" alt="Cucumber hummus bites" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-body"><h3>Cucumber Hummus Bites</h3><p>Two ingredients, one minute, and a snack you can eat guilt-free.</p>
+        <ul class="recipe-meta"><li>8 min</li><li>110 kcal</li><li>Low calorie</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="snacks">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iU3Byb3V0IENoYWF0Ij4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMkU4QjVGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTUzQTJBIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CjxjaXJjbGUgY3g9IjUxMCIgY3k9IjkwIiByPSIxMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xMCIvPgo8Y2lyY2xlIGN4PSI3MCIgY3k9IjUyMCIgcj0iMTA1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMDkiLz4KPHBhdGggZD0iTTE1MCAzMDBoMzAwYTE1MCAxNTAgMCAwIDEtMzAwIDB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMzgiLz48cGF0aCBkPSJNMTUwIDMwMGgzMDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxNCIgb3BhY2l0eT0iLjU1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48Y2lyY2xlIGN4PSIyNDUiIGN5PSIyNTUiIHI9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMyIvPjxjaXJjbGUgY3g9IjMxNSIgY3k9IjI0MCIgcj0iMTgiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yNiIvPjxjaXJjbGUgY3g9IjM3MCIgY3k9IjI2MiIgcj0iMjIiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yMiIvPgo8dGV4dCB4PSIzMDAiIHk9IjU1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45MiI+U3Byb3V0IENoYWF0PC90ZXh0Pgo8L3N2Zz4K" alt="Sprout chaat" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-body"><h3>Sprout &amp; Pomegranate Chaat</h3><p>Street-food flavour, zero deep frying. Made for evening hunger pangs.</p>
+        <ul class="recipe-meta"><li>10 min</li><li>150 kcal</li><li>High fibre</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="snacks">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iTWFzYWxhIENoYWFzIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRjBBNEJDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkU4QjVGIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CjxjaXJjbGUgY3g9IjUxMCIgY3k9IjkwIiByPSIxMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xMCIvPgo8Y2lyY2xlIGN4PSI3MCIgY3k9IjUyMCIgcj0iMTA1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMDkiLz4KPHBhdGggZD0iTTIwNSAyMTBoMTkwdjEzMGE5NSA5NSAwIDAgMS0xOTAgMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNiIvPjxwYXRoIGQ9Ik0zOTUgMjQwaDQwYTQyIDQyIDAgMCAxIDAgODRoLTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTQiIG9wYWNpdHk9Ii40NSIvPjxwYXRoIGQ9Ik0yNTAgMTYwYzAgMjItMjIgMjItMjIgNDRNMzAwIDE1MGMwIDI0LTI0IDI0LTI0IDQ4TTM1MCAxNjBjMCAyMi0yMiAyMi0yMiA0NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjExIiBvcGFjaXR5PSIuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5NYXNhbGEgQ2hhYXM8L3RleHQ+Cjwvc3ZnPgo=" alt="Masala buttermilk" loading="lazy"><span class="recipe-tag">Snacks</span></div>
+        <div class="recipe-body"><h3>Masala Buttermilk (Chaas)</h3><p>Beats bloating, cools the gut and stops you reaching for a cold drink.</p>
+        <ul class="recipe-meta"><li>5 min</li><li>60 kcal</li><li>Debloat</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dinner">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iUGFuZWVyIFRpa2thIEJvd2wiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRThCNUYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNTNBMkEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIzMjAiIHI9IjE1MCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMzIwIiByPSIxMDQiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yNiIvPjxjaXJjbGUgY3g9IjI2NCIgY3k9IjI5MiIgcj0iMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzM2IiBjeT0iMzA2IiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI4Ii8+PGNpcmNsZSBjeD0iMjk2IiBjeT0iMzYyIiByPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI0Ii8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5QYW5lZXIgVGlra2EgQm93bDwvdGV4dD4KPC9zdmc+Cg==" alt="Paneer tikka bowl" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-body"><h3>Grilled Paneer or Tofu Tikka Bowl</h3><p>Restaurant taste, home portions. Perfect for a light, high-protein dinner.</p>
+        <ul class="recipe-meta"><li>25 min</li><li>320 kcal</li><li>High protein</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dinner">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iTGF1a2kgRGFsIFNvdXAiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3RkM2QTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyRThCNUYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cGF0aCBkPSJNMTUwIDMwMGgzMDBhMTUwIDE1MCAwIDAgMS0zMDAgMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zOCIvPjxwYXRoIGQ9Ik0xNTAgMzAwaDMwMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE0IiBvcGFjaXR5PSIuNTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI0NSIgY3k9IjI1NSIgcj0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzE1IiBjeT0iMjQwIiByPSIxOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI2Ii8+PGNpcmNsZSBjeD0iMzcwIiBjeT0iMjYyIiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5MYXVraSBEYWwgU291cDwvdGV4dD4KPC9zdmc+Cg==" alt="Lauki chana dal soup" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-body"><h3>Lauki &amp; Chana Dal Soup with Roti</h3><p>Warm, filling and easy on digestion &mdash; our most-requested winter dinner.</p>
+        <ul class="recipe-meta"><li>30 min</li><li>290 kcal</li><li>Light dinner</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dinner">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iUXVpbm9hIEN1cnJ5IEJvd2wiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFODhDQTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCODQ1NkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIzMjAiIHI9IjE1MCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMzIwIiByPSIxMDQiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yNiIvPjxjaXJjbGUgY3g9IjI2NCIgY3k9IjI5MiIgcj0iMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzM2IiBjeT0iMzA2IiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI4Ii8+PGNpcmNsZSBjeD0iMjk2IiBjeT0iMzYyIiByPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI0Ii8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5RdWlub2EgQ3VycnkgQm93bDwvdGV4dD4KPC9zdmc+Cg==" alt="Quinoa curry bowl" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-body"><h3>Soya or Fish Curry with Quinoa</h3><p>Big flavour, balanced macros. Works for both veg and non-veg plans.</p>
+        <ul class="recipe-meta"><li>30 min</li><li>340 kcal</li><li>Balanced</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dinner">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iTWlsbGV0IEtoaWNoZGkiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGMEE0QkMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyRThCNUYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cGF0aCBkPSJNMTUwIDMwMGgzMDBhMTUwIDE1MCAwIDAgMS0zMDAgMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zOCIvPjxwYXRoIGQ9Ik0xNTAgMzAwaDMwMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE0IiBvcGFjaXR5PSIuNTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI0NSIgY3k9IjI1NSIgcj0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zIi8+PGNpcmNsZSBjeD0iMzE1IiBjeT0iMjQwIiByPSIxOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI2Ii8+PGNpcmNsZSBjeD0iMzcwIiBjeT0iMjYyIiByPSIyMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIyIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5NaWxsZXQgS2hpY2hkaTwvdGV4dD4KPC9zdmc+Cg==" alt="Millet khichdi" loading="lazy"><span class="recipe-tag">Dinner</span></div>
+        <div class="recipe-body"><h3>Millet Khichdi with Stir-fried Veggies</h3><p>Comfort food that still fits the plan. Gentle on the gut, heavy on fibre.</p>
+        <ul class="recipe-meta"><li>25 min</li><li>300 kcal</li><li>One pot</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dessert">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iRGF0ZSBXYWxudXQgQml0ZXMiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNFODhDQTgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNCODQ1NkIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cmVjdCB4PSIxODUiIHk9IjI5MCIgd2lkdGg9IjIzMCIgaGVpZ2h0PSIxMjAiIHJ4PSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM2Ii8+PHBhdGggZD0iTTE4NSAzMjBjMjYgMCAyNiAyMiA1MiAyMnMyNi0yMiA1Mi0yMiAyNiAyMiA1MiAyMiAyNi0yMiA1Mi0yMiAyNiAyMiAyMiAyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEyIiBvcGFjaXR5PSIuNDUiLz48Y2lyY2xlIGN4PSIzMDAiIGN5PSIyNDgiIHI9IjE2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Ik0zMDAgMjY0djI2IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTAiIG9wYWNpdHk9Ii40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHRleHQgeD0iMzAwIiB5PSI1NTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTIiPkRhdGUgV2FsbnV0IEJpdGVzPC90ZXh0Pgo8L3N2Zz4K" alt="Date and walnut bites" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-body"><h3>Date &amp; Walnut Energy Bites</h3><p>No sugar, no ghee-loaded mithai &mdash; three ingredients and a blender.</p>
+        <ul class="recipe-meta"><li>15 min</li><li>90 kcal</li><li>No sugar</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dessert">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iWW9ndXJ0IFBhcmZhaXQiPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3RkM2QTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyRThCNUYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iOTAiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjEwIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iNTIwIiByPSIxMDUiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4wOSIvPgo8cGF0aCBkPSJNMjA1IDIxMGgxOTB2MTMwYTk1IDk1IDAgMCAxLTE5MCAweiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM2Ii8+PHBhdGggZD0iTTM5NSAyNDBoNDBhNDIgNDIgMCAwIDEgMCA4NGgtNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxNCIgb3BhY2l0eT0iLjQ1Ii8+PHBhdGggZD0iTTI1MCAxNjBjMCAyMi0yMiAyMi0yMiA0NE0zMDAgMTUwYzAgMjQtMjQgMjQtMjQgNDhNMzUwIDE2MGMwIDIyLTIyIDIyLTIyIDQ0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTEiIG9wYWNpdHk9Ii40IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHRleHQgeD0iMzAwIiB5PSI1NTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjI2IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTIiPllvZ3VydCBQYXJmYWl0PC90ZXh0Pgo8L3N2Zz4K" alt="Yogurt parfait" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-body"><h3>Greek Yogurt Berry Parfait</h3><p>Creamy, sweet and packed with protein. Dessert that works with your goal.</p>
+        <ul class="recipe-meta"><li>5 min</li><li>140 kcal</li><li>High protein</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dessert">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iUmFnaSBQYW5jYWtlIEJpdGVzIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRjBBNEJDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkU4QjVGIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CjxjaXJjbGUgY3g9IjUxMCIgY3k9IjkwIiByPSIxMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xMCIvPgo8Y2lyY2xlIGN4PSI3MCIgY3k9IjUyMCIgcj0iMTA1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMDkiLz4KPHJlY3QgeD0iMTg1IiB5PSIyOTAiIHdpZHRoPSIyMzAiIGhlaWdodD0iMTIwIiByeD0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNiIvPjxwYXRoIGQ9Ik0xODUgMzIwYzI2IDAgMjYgMjIgNTIgMjJzMjYtMjIgNTItMjIgMjYgMjIgNTIgMjIgMjYtMjIgNTItMjIgMjYgMjIgMjIgMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQ1Ii8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMjQ4IiByPSIxNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjQiLz48cGF0aCBkPSJNMzAwIDI2NHYyNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEwIiBvcGFjaXR5PSIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5SYWdpIFBhbmNha2UgQml0ZXM8L3RleHQ+Cjwvc3ZnPgo=" alt="Ragi banana pancake bites" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-body"><h3>Ragi Banana Pancake Bites</h3><p>Calcium-rich and naturally sweet. The kids will finish these before you do.</p>
+        <ul class="recipe-meta"><li>20 min</li><li>160 kcal</li><li>Kid approved</li></ul></div>
+      </article>
+
+      <article class="recipe reveal" data-cat="dessert">
+        <div class="recipe-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQ2hpYSBQdWRkaW5nIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMkU4QjVGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTUzQTJBIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2cpIi8+CjxjaXJjbGUgY3g9IjUxMCIgY3k9IjkwIiByPSIxMzAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xMCIvPgo8Y2lyY2xlIGN4PSI3MCIgY3k9IjUyMCIgcj0iMTA1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMDkiLz4KPHBhdGggZD0iTTIwNSAyMTBoMTkwdjEzMGE5NSA5NSAwIDAgMS0xOTAgMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNiIvPjxwYXRoIGQ9Ik0zOTUgMjQwaDQwYTQyIDQyIDAgMCAxIDAgODRoLTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTQiIG9wYWNpdHk9Ii40NSIvPjxwYXRoIGQ9Ik0yNTAgMTYwYzAgMjItMjIgMjItMjIgNDRNMzAwIDE1MGMwIDI0LTI0IDI0LTI0IDQ4TTM1MCAxNjBjMCAyMi0yMiAyMi0yMiA0NCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjExIiBvcGFjaXR5PSIuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iNTU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkyIj5DaGlhIFB1ZGRpbmc8L3RleHQ+Cjwvc3ZnPgo=" alt="Dark chocolate chia pudding" loading="lazy"><span class="recipe-tag">Dessert</span></div>
+        <div class="recipe-body"><h3>Dark Chocolate Chia Pudding</h3><p>For the chocolate craving that shows up right before your period.</p>
+        <ul class="recipe-meta"><li>5 min</li><li>150 kcal</li><li>Craving fix</li></ul></div>
+      </article>
+
+    </div>
+
+    <div class="recipe-cta reveal">
+      <p>Want the full recipe book with portions and swaps for your own goal?</p>
+      <a class="btn btn-primary" data-wa="Hi Vrushika! Can you send me the Nutrinance weight-loss recipe book?">Get the recipe book</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="section section-tint" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow eyebrow-pink">Testimonials</span>
+      <h2>2,500+ people. <em>One honest promise.</em></h2>
+      <p>Real results take time &mdash; here is what it looks like when the plan finally fits the person.</p>
+    </div>
+
+    <div class="rating-bar reveal">
+      <div><strong>4.9</strong><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><small>Average client rating</small></div>
+      <div><strong>2,500+</strong><small>Clients guided</small></div>
+      <div><strong>92%</strong><small>Stay past month three</small></div>
+      <div><strong>25.9K</strong><small>Instagram community</small></div>
+    </div>
+
+    <div class="slider reveal">
+      <div class="slider-track" id="sliderTrack">
+
+        <article class="quote">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>I had given up on losing weight after my second delivery. Vrushika did not put me on a starving diet &mdash; she fixed my roti-sabzi portions and my sleep. 11 kg down in five months and I am still eating with my family.</p>
+          <div class="quote-by"><span class="avatar" data-initial="R"></span><div><strong>Riya S.</strong><small>Post-pregnancy plan &middot; Mumbai</small></div></div>
+        </article>
+
+        <article class="quote">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>PCOS made me feel like my own body was against me. Six months on this plan and my cycle is regular for the first time in four years. The acne cleared up as a bonus.</p>
+          <div class="quote-by"><span class="avatar" data-initial="A"></span><div><strong>Anjali M.</strong><small>PCOS / PCOD plan &middot; Pune</small></div></div>
+        </article>
+
+        <article class="quote">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>My son was underweight and refused everything green. The kids plan came with lunchbox ideas he actually finishes. He has gained 4 kg in six months and falls sick far less often.</p>
+          <div class="quote-by"><span class="avatar" data-initial="P"></span><div><strong>Priya K.</strong><small>Kids weight gain &middot; Ahmedabad</small></div></div>
+        </article>
+
+        <article class="quote">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>Thyroid plus a desk job plus travel &mdash; I thought there was no way. The plan had options for restaurants and flights. Down 9 kg and my TSH is finally in range.</p>
+          <div class="quote-by"><span class="avatar" data-initial="K"></span><div><strong>Karan D.</strong><small>Thyroid weight loss &middot; Bengaluru</small></div></div>
+        </article>
+
+        <article class="quote">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>Booked the bridal plan 90 days before the wedding expecting to be starved. Instead I ate six times a day, lost 7 kg and my lehenga needed two alterations.</p>
+          <div class="quote-by"><span class="avatar" data-initial="S"></span><div><strong>Sneha R.</strong><small>Bridal plan &middot; Surat</small></div></div>
+        </article>
+
+        <article class="quote">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>My father is 71 and had lost his appetite completely after his surgery. The senior plan brought his weight and his energy back. The weekly follow-ups meant a lot to us.</p>
+          <div class="quote-by"><span class="avatar" data-initial="M"></span><div><strong>Meera T.</strong><small>Senior weight gain &middot; Rajkot</small></div></div>
+        </article>
+
+      </div>
+      <div class="slider-nav">
+        <button class="s-btn" id="prevBtn" aria-label="Previous testimonial">&#8592;</button>
+        <div class="dots" id="dots"></div>
+        <button class="s-btn" id="nextBtn" aria-label="Next testimonial">&#8594;</button>
+      </div>
+    </div>
+
+    <h3 class="mini-head reveal">Transformations from the Nutrinance family</h3>
+    <div class="transform-grid">
+      <figure class="transform reveal"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQ2xpZW50IHJlc3VsdCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzdGQzZBMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJFOEI1RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI5MCIgcj0iMTMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMTAiLz4KPGNpcmNsZSBjeD0iNzAiIGN5PSI1MjAiIHI9IjEwNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA5Ii8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjI1MCIgcj0iODYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNCIvPjxwYXRoIGQ9Ik0xNTggNDcwYzAtODYgNjQtMTQwIDE0Mi0xNDBzMTQyIDU0IDE0MiAxNDB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMyIvPgo8dGV4dCB4PSIzMDAiIHk9IjU1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45MiI+Q2xpZW50IHJlc3VsdDwvdGV4dD4KPC9zdmc+Cg==" alt="Client transformation" loading="lazy"><figcaption><strong>-12 kg in 6 months</strong><span>PCOS weight loss</span></figcaption></figure>
+      <figure class="transform reveal"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQ2xpZW50IHJlc3VsdCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0U4OENBOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0I4NDU2QiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI5MCIgcj0iMTMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMTAiLz4KPGNpcmNsZSBjeD0iNzAiIGN5PSI1MjAiIHI9IjEwNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA5Ii8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjI1MCIgcj0iODYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNCIvPjxwYXRoIGQ9Ik0xNTggNDcwYzAtODYgNjQtMTQwIDE0Mi0xNDBzMTQyIDU0IDE0MiAxNDB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMyIvPgo8dGV4dCB4PSIzMDAiIHk9IjU1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45MiI+Q2xpZW50IHJlc3VsdDwvdGV4dD4KPC9zdmc+Cg==" alt="Client transformation" loading="lazy"><figcaption><strong>-8 inches off the waist</strong><span>Inch loss plan</span></figcaption></figure>
+      <figure class="transform reveal"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNjAwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQ2xpZW50IHJlc3VsdCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0YwQTRCQyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJFOEI1RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI5MCIgcj0iMTMwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMTAiLz4KPGNpcmNsZSBjeD0iNzAiIGN5PSI1MjAiIHI9IjEwNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA5Ii8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjI1MCIgcj0iODYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4zNCIvPjxwYXRoIGQ9Ik0xNTggNDcwYzAtODYgNjQtMTQwIDE0Mi0xNDBzMTQyIDU0IDE0MiAxNDB6IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuMyIvPgo8dGV4dCB4PSIzMDAiIHk9IjU1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45MiI+Q2xpZW50IHJlc3VsdDwvdGV4dD4KPC9zdmc+Cg==" alt="Client transformation" loading="lazy"><figcaption><strong>+6 kg healthy weight</strong><span>Adult weight gain</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq">
+  <div class="container faq-wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions we get every day</h2>
+    </div>
+    <div class="accordion reveal">
+      <details><summary>Will I have to give up rice, roti and my regular food?</summary><p>Never. Nutrinance plans are built around desi food. We adjust portions, timing and combinations instead of banning entire food groups &mdash; that is exactly why our clients stick with it.</p></details>
+      <details><summary>Is the plan customised or a ready-made chart?</summary><p>Fully customised. Every plan is written after reviewing your medical history, reports, activity level, work hours, food preferences and even your family cooking style.</p></details>
+      <details><summary>Do you take clients outside my city?</summary><p>Yes. Everything runs online over WhatsApp and video calls, so we work with clients across India and abroad.</p></details>
+      <details><summary>I have PCOS and thyroid together. Can you still help?</summary><p>Absolutely &mdash; overlapping hormonal conditions are one of our main specialities. Your plan will account for both, along with any medication you are taking.</p></details>
+      <details><summary>How soon will I see results?</summary><p>Most clients notice better energy and less bloating within two weeks. Visible weight or inch change usually starts from week three or four, depending on your starting point.</p></details>
+      <details><summary>What does a program cost?</summary><p>It depends on the program and duration you choose. Message us on WhatsApp and we will share the current packages after understanding your goal.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOK ================= -->
+<section class="section book" id="book">
+  <div class="container book-inner">
+    <div class="book-copy reveal">
+      <span class="eyebrow eyebrow-light">Book an appointment</span>
+      <h2>Your first step is one message away</h2>
+      <p>Fill this in and it opens WhatsApp with your details ready to send &mdash; no forms, no waiting, no call centre. Vrushika replies personally.</p>
+      <ul class="book-points">
+        <li><span>&#10003;</span> Free 15-minute discovery call</li>
+        <li><span>&#10003;</span> Honest advice before you pay anything</li>
+        <li><span>&#10003;</span> Reply usually within a few hours</li>
+      </ul>
+    </div>
+    <form class="book-form reveal" id="bookForm" novalidate>
+      <label>Your name<input type="text" id="bName" placeholder="e.g. Ananya Shah" required></label>
+      <label>Age<input type="number" id="bAge" min="1" max="110" placeholder="e.g. 29"></label>
+      <label>What do you need help with?
+        <select id="bGoal">
+          <option>Weight loss</option>
+          <option>PCOS / PCOD</option>
+          <option>Thyroid</option>
+          <option>Post-pregnancy recovery</option>
+          <option>Diabetes or other medical condition</option>
+          <option>Weight gain</option>
+          <option>Kids or toddler nutrition</option>
+          <option>Bridal plan</option>
+          <option>Detox</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+      <label>Anything else we should know?<textarea id="bNote" rows="3" placeholder="Reports, medication, allergies, timeline..."></textarea></label>
+      <button type="submit" class="btn btn-wa btn-lg btn-block">Send on WhatsApp</button>
+      <small class="form-note">Opens WhatsApp with your message pre-filled. Nothing is stored on this site.</small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgMTEwIiB3aWR0aD0iNDIwIiBoZWlnaHQ9IjExMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJOdXRyaW5hbmNlIFdlbGxiZWluZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxlYWYiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM0Q5RTZFIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOEZDRkFFIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4LDEyKSI+CiAgICA8Y2lyY2xlIGN4PSI0MyIgY3k9IjQzIiByPSI0MyIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjE2KSIvPgogICAgPHBhdGggZD0iTTQzIDc2YzAtMjIgOC0zNiAzMC00NC00IDI2LTE0IDM5LTMwIDQ0eiIgZmlsbD0iI0M5RTlENiIvPgogICAgPHBhdGggZD0iTTQzIDc2QzQzIDUwIDMzIDM1IDEyIDI4YzMgMjcgMTQgNDIgMzEgNDh6IiBmaWxsPSIjOEZDRkFFIi8+CiAgICA8cGF0aCBkPSJNNDMgNzhWNDQiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIzLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNDMiIGN5PSIyNCIgcj0iOSIgZmlsbD0iI0Y1QjhDOSIvPgogICAgPGNpcmNsZSBjeD0iNDMiIGN5PSIyNCIgcj0iMy40IiBmaWxsPSIjRDI2ODhBIi8+CiAgPC9nPgogIDx0ZXh0IHg9IjEwNCIgeT0iNTgiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCdUaW1lcyBOZXcgUm9tYW4nLHNlcmlmIiBmb250LXNpemU9IjQwIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjRkZGRkZGIiBsZXR0ZXItc3BhY2luZz0iLTAuNSI+TnV0cmluYW5jZTwvdGV4dD4KICA8dGV4dCB4PSIxMDYiIHk9IjgyIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiNGNUI4QzkiIGxldHRlci1zcGFjaW5nPSI1LjYiPldFTExCRUlORzwvdGV4dD4KPC9zdmc+Cg==" alt="Nutrinance" width="220" height="58">
+      <p>Customised desi diet plans for weight loss, weight gain and hormonal health &mdash; for women, men, kids and toddlers.</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/nutrinance.wellbeing" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        <a data-wa="Hi Nutrinance!">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#story">Our Story</a>
+      <a href="#programs">Programs</a>
+      <a href="#women">Women&rsquo;s Health</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#reviews">Reviews</a>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <a href="#programs">Weight Loss</a>
+      <a href="#programs">Weight Gain</a>
+      <a href="#women">PCOS &amp; Thyroid</a>
+      <a href="#programs">Post-Pregnancy</a>
+      <a href="#programs">Detox &amp; Bridal</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <a data-wa="Hi Nutrinance! I would like to book a consultation.">Book a consultation</a>
+      <a href="mailto:hello@nutrinance.in">hello@nutrinance.in</a>
+      <p class="tiny">Mon &ndash; Sat &middot; 10am to 7pm IST</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> Nutrinance Wellbeing. All rights reserved.</p>
+    <p class="tiny">Nutrition guidance is not a substitute for medical advice. Please consult your doctor for any medical condition.</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" data-wa="Hi Vrushika! I would like to know more about the Nutrinance programs." aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" width="27" height="27" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.05c-.25.69-1.46 1.32-2 1.36-.51.04-1.16.06-1.87-.12-.43-.13-.98-.32-1.69-.62-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.6-1.21-3.06s.77-2.17 1.04-2.47c.27-.3.59-.37.79-.37h.57c.18 0 .43-.07.67.51.25.6.85 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.12.07.72-.18 1.41Z"/></svg>
+  <span>Chat with us</span>
+</a>
+
+<script>
+/* ============================================================
+   NUTRINANCE — front-end interactions
+   ------------------------------------------------------------
+   >>> CHANGE THE WHATSAPP NUMBER ON THE NEXT LINE ONLY. <<<
+   Format: country code + number, digits only, no + or spaces.
+   Example for India: "919876543210"
+   ============================================================ */
+var WHATSAPP_NUMBER = "919999999999";
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* ---------- 1. Wire up every WhatsApp link ---------- */
+  var waLinks = document.querySelectorAll("[data-wa]");
+  waLinks.forEach(function (el) {
+    var msg = el.getAttribute("data-wa") || "Hi Nutrinance!";
+    el.setAttribute("href", "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg));
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener");
+  });
+
+  /* ---------- 2. Mobile navigation ---------- */
+  var nav = document.getElementById("nav");
+  var burger = document.getElementById("hamburger");
+  var backdrop = document.createElement("div");
+  backdrop.className = "nav-backdrop";
+  document.body.appendChild(backdrop);
+
+  function closeNav() {
+    nav.classList.remove("is-open");
+    burger.classList.remove("is-open");
+    backdrop.classList.remove("is-on");
+    document.body.classList.remove("nav-open");
+    burger.setAttribute("aria-expanded", "false");
+  }
+  burger.addEventListener("click", function () {
+    var open = nav.classList.toggle("is-open");
+    burger.classList.toggle("is-open", open);
+    backdrop.classList.toggle("is-on", open);
+    document.body.classList.toggle("nav-open", open);
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  backdrop.addEventListener("click", closeNav);
+  nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeNav); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
+
+  /* ---------- 3. Sticky header + active section ---------- */
+  var header = document.getElementById("header");
+  var navLinks = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+  var sections = navLinks
+    .map(function (a) { return document.querySelector(a.getAttribute("href")); })
+    .filter(Boolean);
+
+  function onScroll() {
+    header.classList.toggle("is-stuck", window.scrollY > 12);
+    var pos = window.scrollY + 150, current = null;
+    sections.forEach(function (sec) { if (sec.offsetTop <= pos) current = sec.id; });
+    navLinks.forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- 4. Program tabs ---------- */
+  var tabs = document.querySelectorAll(".tab");
+  var panels = document.querySelectorAll(".tab-panel");
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var key = tab.getAttribute("data-tab");
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle("is-active", p.getAttribute("data-panel") === key);
+      });
+      revealAll(document.querySelector('.tab-panel[data-panel="' + key + '"]'));
+    });
+  });
+
+  /* ---------- 5. Recipe filters ---------- */
+  var filters = document.querySelectorAll(".filter");
+  var recipes = document.querySelectorAll(".recipe");
+  filters.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var key = btn.getAttribute("data-filter");
+      filters.forEach(function (f) { f.classList.toggle("is-active", f === btn); });
+      recipes.forEach(function (card) {
+        var show = key === "all" || card.getAttribute("data-cat") === key;
+        card.classList.toggle("is-hidden", !show);
+        if (show) {
+          card.classList.remove("in");
+          void card.offsetWidth;
+          card.classList.add("in");
+        }
+      });
+    });
+  });
+
+  /* ---------- 6. Testimonial slider ---------- */
+  var track = document.getElementById("sliderTrack");
+  var dotsWrap = document.getElementById("dots");
+  var prevBtn = document.getElementById("prevBtn");
+  var nextBtn = document.getElementById("nextBtn");
+
+  function pageCount() {
+    var cards = track.children.length || 1;
+    if (!track.clientWidth) return 1;
+    return Math.min(cards, Math.max(1, Math.round(track.scrollWidth / track.clientWidth)));
+  }
+  function buildDots() {
+    dotsWrap.innerHTML = "";
+    for (var i = 0; i < pageCount(); i++) {
+      var d = document.createElement("button");
+      d.setAttribute("aria-label", "Go to testimonial page " + (i + 1));
+      d.dataset.page = i;
+      d.addEventListener("click", function (e) {
+        track.scrollTo({ left: track.clientWidth * Number(e.currentTarget.dataset.page), behavior: "smooth" });
+      });
+      dotsWrap.appendChild(d);
+    }
+    syncDots();
+  }
+  function syncDots() {
+    var active = Math.round(track.scrollLeft / track.clientWidth);
+    dotsWrap.querySelectorAll("button").forEach(function (d, i) {
+      d.classList.toggle("is-active", i === active);
+    });
+  }
+  if (track) {
+    buildDots();
+    track.addEventListener("scroll", syncDots, { passive: true });
+    window.addEventListener("load", buildDots);
+    var rt;
+    window.addEventListener("resize", function () {
+      clearTimeout(rt);
+      rt = setTimeout(buildDots, 150);
+    });
+    nextBtn.addEventListener("click", function () {
+      var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+      track.scrollTo({ left: atEnd ? 0 : track.scrollLeft + track.clientWidth, behavior: "smooth" });
+    });
+    prevBtn.addEventListener("click", function () {
+      var atStart = track.scrollLeft <= 8;
+      track.scrollTo({ left: atStart ? track.scrollWidth : track.scrollLeft - track.clientWidth, behavior: "smooth" });
+    });
+  }
+
+  /* ---------- 7. Booking form -> WhatsApp ---------- */
+  var form = document.getElementById("bookForm");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("bName");
+      var age = document.getElementById("bAge").value.trim();
+      var goal = document.getElementById("bGoal").value;
+      var note = document.getElementById("bNote").value.trim();
+
+      if (!name.value.trim()) {
+        name.classList.add("err");
+        name.focus();
+        return;
+      }
+      name.classList.remove("err");
+
+      var lines = [
+        "Hi Vrushika! I would like to book a consultation with Nutrinance.",
+        "",
+        "Name: " + name.value.trim()
+      ];
+      if (age) lines.push("Age: " + age);
+      lines.push("I need help with: " + goal);
+      if (note) lines.push("Other details: " + note);
+      lines.push("", "Looking forward to hearing from you!");
+
+      window.open(
+        "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n")),
+        "_blank",
+        "noopener"
+      );
+    });
+    document.getElementById("bName").addEventListener("input", function () {
+      this.classList.remove("err");
+    });
+  }
+
+  /* ---------- 8. Reveal on scroll ---------- */
+  function revealAll(scope) {
+    (scope || document).querySelectorAll(".reveal").forEach(function (el) {
+      el.classList.add("in");
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          setTimeout(function () { el.classList.add("in"); }, i * 70);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  } else {
+    revealAll();
+  }
+
+  /* ---------- 9. Footer year ---------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+});
+
+</script>

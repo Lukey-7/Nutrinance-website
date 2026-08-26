@@ -1,0 +1,13 @@
+# Binaries & Downloads
+cloudflared.exe
+*.exe
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.claude/
+.vscode/
+.idea/
+
+# Logs
+*.log

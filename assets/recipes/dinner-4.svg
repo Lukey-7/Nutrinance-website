@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Millet Khichdi">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0A4BC"/><stop offset="1" stop-color="#2E8B5F"/></linearGradient></defs>
+<rect width="600" height="600" fill="url(#g)"/>
+<circle cx="510" cy="90" r="130" fill="#fff" opacity=".10"/>
+<circle cx="70" cy="520" r="105" fill="#fff" opacity=".09"/>
+<path d="M150 300h300a150 150 0 0 1-300 0z" fill="#fff" opacity=".38"/><path d="M150 300h300" stroke="#fff" stroke-width="14" opacity=".55" stroke-linecap="round"/><circle cx="245" cy="255" r="26" fill="#fff" opacity=".3"/><circle cx="315" cy="240" r="18" fill="#fff" opacity=".26"/><circle cx="370" cy="262" r="22" fill="#fff" opacity=".22"/>
+<text x="300" y="556" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="#fff" opacity=".92">Millet Khichdi</text>
+</svg>
