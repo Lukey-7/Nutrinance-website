@@ -16,6 +16,8 @@ const MIME_TYPES = {
   '.avif': 'image/avif',
   '.gif': 'image/gif',
   '.ico': 'image/x-icon',
+  '.cur': 'image/x-icon',
+  '.bmp': 'image/bmp',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
@@ -26,8 +28,13 @@ const MIME_TYPES = {
   '.md': 'text/plain; charset=utf-8',
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
+  '.ogv': 'video/ogg',
   '.mp3': 'audio/mpeg',
   '.wav': 'audio/wav',
+  '.ogg': 'audio/ogg',
+  '.m4a': 'audio/mp4',
+  '.flac': 'audio/flac',
+  '.aac': 'audio/aac',
   '.pdf': 'application/pdf',
   '.xml': 'application/xml; charset=utf-8',
   '.wasm': 'application/wasm',
@@ -37,8 +44,8 @@ const MIME_TYPES = {
 
 const STATIC_EXTENSIONS = new Set([
   '.css', '.js', '.mjs', '.png', '.jpg', '.jpeg', '.svg',
-  '.webp', '.avif', '.gif', '.ico', '.woff', '.woff2', '.ttf', '.otf',
-  '.eot', '.mp4', '.webm', '.mp3', '.wav', '.pdf', '.wasm'
+  '.webp', '.avif', '.gif', '.ico', '.cur', '.bmp', '.woff', '.woff2', '.ttf', '.otf',
+  '.eot', '.mp4', '.webm', '.ogv', '.mp3', '.wav', '.ogg', '.m4a', '.flac', '.aac', '.pdf', '.wasm'
 ]);
 
 function safeIsFile(filePath) {
@@ -65,8 +72,19 @@ function safeStat(filePath) {
   }
 }
 
+function matchesETag(headerValue, currentETag) {
+  if (!headerValue || typeof headerValue !== 'string') return false;
+  const trimmed = headerValue.trim();
+  if (trimmed === '*') return true;
+  const cleanTag = (t) => t.trim().replace(/^W\//, '');
+  const currentClean = cleanTag(currentETag);
+  const tags = trimmed.split(',').map(cleanTag);
+  return tags.includes(currentClean);
+}
+
 function handler(req, res) {
   const method = req.method ? req.method.toUpperCase() : 'GET';
+  const reqHeaders = req.headers || {};
 
   // Handle CORS preflight OPTIONS request
   if (method === 'OPTIONS') {
@@ -97,11 +115,11 @@ function handler(req, res) {
     return res.end('Bad Request');
   }
 
-  // Remove null bytes
-  urlPath = urlPath.replace(/\0/g, '') || '/';
+  // Remove null bytes and normalize slashes
+  urlPath = urlPath.replace(/\0/g, '').replace(/\\/g, '/') || '/';
 
   // Disallow hidden files/directories (e.g. .git, .env, .agents)
-  const segments = urlPath.split(/[/\\]/);
+  const segments = urlPath.split('/');
   if (segments.some(s => s.startsWith('.') && s !== '.' && s !== '..')) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('Forbidden');
@@ -180,67 +198,103 @@ function handler(req, res) {
     headers['Cache-Control'] = 'public, max-age=3600';
   }
 
-  // Conditional request handling (ETag & Last-Modified)
-  const ifNoneMatch = req.headers['if-none-match'];
-  const ifModifiedSince = req.headers['if-modified-since'];
-
-  if (ifNoneMatch && (ifNoneMatch === etag || ifNoneMatch === '*')) {
-    res.writeHead(304, headers);
-    return res.end();
+  // RFC 7232 Precondition Checks: If-Match & If-Unmodified-Since
+  const ifMatch = reqHeaders['if-match'];
+  if (ifMatch && !matchesETag(ifMatch, etag)) {
+    res.writeHead(412, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('Precondition Failed');
   }
 
-  if (ifModifiedSince && !ifNoneMatch) {
-    const ifModifiedDate = new Date(ifModifiedSince);
-    if (!isNaN(ifModifiedDate.getTime()) && fileStat.mtime <= ifModifiedDate) {
+  const ifUnmodifiedSince = reqHeaders['if-unmodified-since'];
+  if (ifUnmodifiedSince) {
+    const unmodDate = new Date(ifUnmodifiedSince);
+    if (!isNaN(unmodDate.getTime())) {
+      const fileSec = Math.floor(fileStat.mtime.getTime() / 1000);
+      const unmodSec = Math.floor(unmodDate.getTime() / 1000);
+      if (fileSec > unmodSec) {
+        res.writeHead(412, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end('Precondition Failed');
+      }
+    }
+  }
+
+  // RFC 7232 Conditional Request Handling: If-None-Match & If-Modified-Since
+  const ifNoneMatch = reqHeaders['if-none-match'];
+  const ifModifiedSince = reqHeaders['if-modified-since'];
+
+  if (ifNoneMatch) {
+    if (matchesETag(ifNoneMatch, etag)) {
       res.writeHead(304, headers);
       return res.end();
     }
+  } else if (ifModifiedSince) {
+    const ifModifiedDate = new Date(ifModifiedSince);
+    if (!isNaN(ifModifiedDate.getTime())) {
+      const fileSec = Math.floor(fileStat.mtime.getTime() / 1000);
+      const ifModSec = Math.floor(ifModifiedDate.getTime() / 1000);
+      if (fileSec <= ifModSec) {
+        res.writeHead(304, headers);
+        return res.end();
+      }
+    }
   }
 
-  // Range request handling (RFC 7233)
-  const rangeHeader = req.headers.range;
+  // RFC 7233 Range Request Handling
+  const rangeHeader = reqHeaders.range;
+  let processRange = false;
+
   if (rangeHeader && method === 'GET' && rangeHeader.startsWith('bytes=')) {
+    const ifRange = reqHeaders['if-range'];
+    if (!ifRange || matchesETag(ifRange, etag) || ifRange.trim() === mtimeUTC) {
+      processRange = true;
+    }
+  }
+
+  if (processRange) {
     const rangeSpec = rangeHeader.slice(6).trim();
-    const parts = rangeSpec.split('-');
-    let start = parts[0] ? parseInt(parts[0], 10) : NaN;
-    let end = parts[1] ? parseInt(parts[1], 10) : NaN;
+    // If multipart range (contains comma), fall back to full 200 representation
+    if (!rangeSpec.includes(',')) {
+      const parts = rangeSpec.split('-');
+      let start = parts[0] !== '' ? parseInt(parts[0], 10) : NaN;
+      let end = parts[1] !== '' ? parseInt(parts[1], 10) : NaN;
 
-    if (isNaN(start) && !isNaN(end)) {
-      // Suffix byte range: bytes=-500 (last 500 bytes)
-      start = fileStat.size - end;
-      end = fileStat.size - 1;
-    } else if (!isNaN(start) && isNaN(end)) {
-      // Open byte range: bytes=500- (from 500 to end of file)
-      end = fileStat.size - 1;
-    }
-
-    if (isNaN(start) || isNaN(end) || start < 0 || start > end || start >= fileStat.size) {
-      headers['Content-Range'] = `bytes */${fileStat.size}`;
-      res.writeHead(416, headers);
-      return res.end('Requested Range Not Satisfiable');
-    }
-
-    // Clamp end to file bounds
-    if (end >= fileStat.size) {
-      end = fileStat.size - 1;
-    }
-
-    const chunkSize = end - start + 1;
-    headers['Content-Range'] = `bytes ${start}-${end}/${fileStat.size}`;
-    headers['Content-Length'] = chunkSize;
-
-    res.writeHead(206, headers);
-    const rangeStream = fs.createReadStream(resolvedPath, { start, end });
-    const cleanup = () => rangeStream.destroy();
-    req.on('close', cleanup);
-    res.on('close', cleanup);
-    rangeStream.on('error', () => {
-      if (!res.headersSent) {
-        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      if (isNaN(start) && !isNaN(end)) {
+        // Suffix byte range: bytes=-500 (last 500 bytes, clamped to file bounds per RFC 7233 §2.1)
+        start = Math.max(0, fileStat.size - end);
+        end = fileStat.size - 1;
+      } else if (!isNaN(start) && isNaN(end)) {
+        // Open byte range: bytes=500-
+        end = fileStat.size - 1;
       }
-      res.end('Internal Server Error');
-    });
-    return rangeStream.pipe(res);
+
+      if (isNaN(start) || isNaN(end) || start < 0 || start > end || start >= fileStat.size) {
+        headers['Content-Range'] = `bytes */${fileStat.size}`;
+        res.writeHead(416, headers);
+        return res.end('Requested Range Not Satisfiable');
+      }
+
+      // Clamp end to file bounds
+      if (end >= fileStat.size) {
+        end = fileStat.size - 1;
+      }
+
+      const chunkSize = end - start + 1;
+      headers['Content-Range'] = `bytes ${start}-${end}/${fileStat.size}`;
+      headers['Content-Length'] = chunkSize;
+
+      res.writeHead(206, headers);
+      const rangeStream = fs.createReadStream(resolvedPath, { start, end });
+      const cleanup = () => rangeStream.destroy();
+      req.on('close', cleanup);
+      res.on('close', cleanup);
+      rangeStream.on('error', () => {
+        if (!res.headersSent) {
+          res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+        }
+        res.end('Internal Server Error');
+      });
+      return rangeStream.pipe(res);
+    }
   }
 
   // Full file response (GET / HEAD)
@@ -275,4 +329,3 @@ if (require.main === module) {
     console.log(`Nutrinance server listening on http://localhost:${port}`);
   });
 }
-

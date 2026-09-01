@@ -236,6 +236,74 @@ async function testServerEntrypoint() {
       assert.strictEqual(res.statusCode, 400);
     });
 
+    // 24. Suffix range exceeding file size (RFC 7233 §2.1)
+    await check('GET /styles.css with suffix range exceeding file size returns 206 full representation', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'Range': 'bytes=-999999' } });
+      assert.strictEqual(res.statusCode, 206);
+      assert(res.headers['content-range'].startsWith('bytes 0-'));
+      assert(res.body.length > 100);
+    });
+
+    // 25. Exact Last-Modified timestamp in If-Modified-Since (ms truncation test)
+    await check('GET /styles.css with exact Last-Modified header returns 304 Not Modified', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const lastMod = initRes.headers['last-modified'];
+      assert(lastMod);
+      const condRes = await rawRequest('/styles.css', { headers: { 'If-Modified-Since': lastMod } });
+      assert.strictEqual(condRes.statusCode, 304);
+      assert.strictEqual(condRes.body.length, 0);
+    });
+
+    // 26. Comma-separated If-None-Match with weak ETag matching
+    await check('GET /styles.css with comma-separated If-None-Match list returns 304', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const etag = initRes.headers['etag'];
+      assert(etag);
+      const condRes = await rawRequest('/styles.css', { headers: { 'If-None-Match': `"dummy-etag", ${etag}` } });
+      assert.strictEqual(condRes.statusCode, 304);
+      assert.strictEqual(condRes.body.length, 0);
+    });
+
+    // 27. RFC 7233 If-Range header handling
+    await check('GET /styles.css with If-Range validator matching returns 206, mismatching returns 200', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const etag = initRes.headers['etag'];
+      // Matching If-Range -> 206
+      const matchRes = await rawRequest('/styles.css', {
+        headers: { 'Range': 'bytes=0-49', 'If-Range': etag }
+      });
+      assert.strictEqual(matchRes.statusCode, 206);
+      assert.strictEqual(matchRes.body.length, 50);
+
+      // Mismatching If-Range -> 200
+      const mismatchRes = await rawRequest('/styles.css', {
+        headers: { 'Range': 'bytes=0-49', 'If-Range': '"stale-etag-value"' }
+      });
+      assert.strictEqual(mismatchRes.statusCode, 200);
+      assert(mismatchRes.body.length > 50);
+    });
+
+    // 28. RFC 7232 If-Match Precondition
+    await check('GET /styles.css with mismatching If-Match returns 412 Precondition Failed', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'If-Match': '"wrong-etag-val"' } });
+      assert.strictEqual(res.statusCode, 412);
+    });
+
+    // 29. RFC 7232 If-Unmodified-Since Precondition
+    await check('GET /styles.css with past date If-Unmodified-Since returns 412 Precondition Failed', async () => {
+      const pastDate = new Date('2020-01-01T00:00:00Z').toUTCString();
+      const res = await rawRequest('/styles.css', { headers: { 'If-Unmodified-Since': pastDate } });
+      assert.strictEqual(res.statusCode, 412);
+    });
+
+    // 30. Backslash path normalization
+    await check('GET /assets\\logo.png normalizes backslash to forward slash and returns 200', async () => {
+      const res = await rawRequest('/assets\\logo.png');
+      assert.strictEqual(res.statusCode, 200);
+      assert.strictEqual(res.headers['content-type'], 'image/png');
+      assert(res.body.length > 0);
+    });
+
     return { total, passed, failed: failures.length, failures };
   } finally {
     server.close();
@@ -258,4 +326,3 @@ if (require.main === module) {
 }
 
 module.exports = { run: testServerEntrypoint, testServerEntrypoint };
-
