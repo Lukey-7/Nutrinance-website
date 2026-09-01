@@ -304,6 +304,75 @@ async function testServerEntrypoint() {
       assert(res.body.length > 0);
     });
 
+    // 31. Unquoted ETag in If-None-Match
+    await check('GET /styles.css with unquoted If-None-Match returns 304 Not Modified', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const etag = initRes.headers['etag'];
+      const rawTag = etag.replace(/^W\//, '').replace(/^"|"$/g, '');
+      const condRes = await rawRequest('/styles.css', { headers: { 'If-None-Match': rawTag } });
+      assert.strictEqual(condRes.statusCode, 304);
+      assert.strictEqual(condRes.body.length, 0);
+    });
+
+    // 32. Wildcard If-Match: *
+    await check('GET /styles.css with If-Match: * returns 200 OK', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'If-Match': '*' } });
+      assert.strictEqual(res.statusCode, 200);
+    });
+
+    // 33. RFC 7232 §3.4 If-Match precedence over If-Unmodified-Since
+    await check('GET /styles.css with valid If-Match and past If-Unmodified-Since returns 200 OK', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const etag = initRes.headers['etag'];
+      const pastDate = new Date('2020-01-01T00:00:00Z').toUTCString();
+      const res = await rawRequest('/styles.css', {
+        headers: { 'If-Match': etag, 'If-Unmodified-Since': pastDate }
+      });
+      assert.strictEqual(res.statusCode, 200);
+    });
+
+    // 34. If-Range with HTTP Date format matching Last-Modified
+    await check('GET /styles.css with If-Range Date matching returns 206, stale returns 200', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const lastMod = initRes.headers['last-modified'];
+      const matchRes = await rawRequest('/styles.css', {
+        headers: { 'Range': 'bytes=0-49', 'If-Range': lastMod }
+      });
+      assert.strictEqual(matchRes.statusCode, 206);
+      assert.strictEqual(matchRes.body.length, 50);
+
+      const pastDate = new Date('2020-01-01T00:00:00Z').toUTCString();
+      const staleRes = await rawRequest('/styles.css', {
+        headers: { 'Range': 'bytes=0-49', 'If-Range': pastDate }
+      });
+      assert.strictEqual(staleRes.statusCode, 200);
+    });
+
+    // 35. Absolute URL in request line (RFC 7230 §5.3.2)
+    await check('GET http://localhost/styles.css absolute URL returns 200 with text/css', async () => {
+      const res = await rawRequest('http://localhost/styles.css');
+      assert.strictEqual(res.statusCode, 200);
+      assert(res.headers['content-type'].includes('text/css'));
+    });
+
+    // 36. Byte range with internal whitespace and 1-byte range (0-0)
+    await check('GET /styles.css with Range: bytes= 0 - 0 returns 206 with 1 byte', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'Range': 'bytes= 0 - 0 ' } });
+      assert.strictEqual(res.statusCode, 206);
+      assert.strictEqual(res.body.length, 1);
+      assert.strictEqual(res.headers['content-length'], '1');
+    });
+
+    // 37. Inverted range and non-numeric range return 416
+    await check('GET /styles.css with inverted or invalid range returns 416', async () => {
+      const invRes = await rawRequest('/styles.css', { headers: { 'Range': 'bytes=100-50' } });
+      assert.strictEqual(invRes.statusCode, 416);
+      assert(invRes.headers['content-range'].startsWith('bytes */'));
+
+      const nanRes = await rawRequest('/styles.css', { headers: { 'Range': 'bytes=abc-def' } });
+      assert.strictEqual(nanRes.statusCode, 416);
+    });
+
     return { total, passed, failed: failures.length, failures };
   } finally {
     server.close();

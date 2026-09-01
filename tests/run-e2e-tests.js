@@ -37,7 +37,7 @@ async function runAllTiers() {
     { name: 'Tier 4: Real-World Application Scenarios', runner: tier4Runner, min: 7 },
     { name: 'Tier 5A: Adversarial Integrations & WhatsApp/Instagram Hardening', runner: tier5IntegrationsRunner, min: 30 },
     { name: 'Tier 5B: Adversarial Scroll Engine, WAAPI & GSAP Hardening', runner: tier5ScrollRunner, min: 30 },
-    { name: 'Tier 6: Universal Serverless & Static HTTP Entrypoint', runner: serverEntrypointRunner, min: 30 }
+    { name: 'Tier 6: Universal Serverless & Static HTTP Entrypoint', runner: serverEntrypointRunner, min: 37 }
   ];
 
   let grandTotal = 0;

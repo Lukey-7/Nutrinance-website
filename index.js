@@ -76,10 +76,17 @@ function matchesETag(headerValue, currentETag) {
   if (!headerValue || typeof headerValue !== 'string') return false;
   const trimmed = headerValue.trim();
   if (trimmed === '*') return true;
-  const cleanTag = (t) => t.trim().replace(/^W\//, '');
-  const currentClean = cleanTag(currentETag);
-  const tags = trimmed.split(',').map(cleanTag);
-  return tags.includes(currentClean);
+  const normalize = (t) => t.trim().replace(/^W\//i, '').replace(/^"|"$/g, '');
+  const currentNormalized = normalize(currentETag);
+  const tags = trimmed.split(',').map(normalize);
+  return tags.includes(currentNormalized);
+}
+
+function isPathInside(filePath, parentDir) {
+  const normalizedFile = path.resolve(filePath).toLowerCase();
+  const normalizedParent = path.resolve(parentDir).toLowerCase();
+  const parentWithSep = normalizedParent.endsWith(path.sep) ? normalizedParent : normalizedParent + path.sep;
+  return normalizedFile === normalizedParent || normalizedFile.startsWith(parentWithSep);
 }
 
 function handler(req, res) {
@@ -109,7 +116,14 @@ function handler(req, res) {
 
   let urlPath;
   try {
-    urlPath = decodeURIComponent((req.url || '/').split('?')[0].split('#')[0]);
+    const rawUrl = req.url || '/';
+    let pathname = rawUrl;
+    if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
+      pathname = new URL(rawUrl).pathname;
+    } else {
+      pathname = rawUrl.split('?')[0].split('#')[0];
+    }
+    urlPath = decodeURIComponent(pathname);
   } catch (err) {
     res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('Bad Request');
@@ -126,12 +140,10 @@ function handler(req, res) {
   }
 
   const rootDir = path.resolve(__dirname);
-  const rootDirWithSep = rootDir.endsWith(path.sep) ? rootDir : rootDir + path.sep;
   let resolvedPath = path.normalize(path.join(rootDir, urlPath));
 
   // Security guard against directory traversal
-  const isInsideRoot = resolvedPath === rootDir || resolvedPath.toLowerCase().startsWith(rootDirWithSep.toLowerCase());
-  if (!isInsideRoot) {
+  if (!isPathInside(resolvedPath, rootDir)) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('Forbidden');
   }
@@ -147,17 +159,20 @@ function handler(req, res) {
   // Check for clean URLs (e.g. /nutrinance-demo or /nutrinance-demo/ -> /nutrinance-demo.html)
   if (!safeIsFile(resolvedPath)) {
     const cleanRelative = urlPath.replace(/\/+$/, '');
-    const htmlCandidate = path.normalize(path.join(rootDir, cleanRelative + '.html'));
-    if (safeIsFile(htmlCandidate)) {
-      resolvedPath = htmlCandidate;
-    } else if (safeIsFile(path.join(rootDir, 'public', urlPath))) {
-      resolvedPath = path.join(rootDir, 'public', urlPath);
-    } else if (safeIsFile(path.join(rootDir, 'public', cleanRelative + '.html'))) {
-      resolvedPath = path.join(rootDir, 'public', cleanRelative + '.html');
-    } else if (safeIsFile(path.join(rootDir, 'dist', urlPath))) {
-      resolvedPath = path.join(rootDir, 'dist', urlPath);
-    } else if (safeIsFile(path.join(rootDir, 'dist', cleanRelative + '.html'))) {
-      resolvedPath = path.join(rootDir, 'dist', cleanRelative + '.html');
+    const candidates = [
+      path.normalize(path.join(rootDir, cleanRelative + '.html')),
+      path.join(rootDir, 'public', urlPath),
+      path.join(rootDir, 'public', cleanRelative + '.html'),
+      path.join(rootDir, 'dist', urlPath),
+      path.join(rootDir, 'dist', cleanRelative + '.html'),
+      path.join(rootDir, 'out', urlPath),
+      path.join(rootDir, 'out', cleanRelative + '.html')
+    ];
+    for (const cand of candidates) {
+      if (isPathInside(cand, rootDir) && safeIsFile(cand)) {
+        resolvedPath = cand;
+        break;
+      }
     }
   }
 
@@ -200,13 +215,15 @@ function handler(req, res) {
 
   // RFC 7232 Precondition Checks: If-Match & If-Unmodified-Since
   const ifMatch = reqHeaders['if-match'];
-  if (ifMatch && !matchesETag(ifMatch, etag)) {
-    res.writeHead(412, { 'Content-Type': 'text/plain; charset=utf-8' });
-    return res.end('Precondition Failed');
-  }
-
   const ifUnmodifiedSince = reqHeaders['if-unmodified-since'];
-  if (ifUnmodifiedSince) {
+
+  if (ifMatch) {
+    if (!matchesETag(ifMatch, etag)) {
+      res.writeHead(412, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end('Precondition Failed');
+    }
+    // Per RFC 7232 §3.4: If If-Match is present, If-Unmodified-Since MUST be ignored
+  } else if (ifUnmodifiedSince) {
     const unmodDate = new Date(ifUnmodifiedSince);
     if (!isNaN(unmodDate.getTime())) {
       const fileSec = Math.floor(fileStat.mtime.getTime() / 1000);
@@ -245,55 +262,68 @@ function handler(req, res) {
 
   if (rangeHeader && method === 'GET' && rangeHeader.startsWith('bytes=')) {
     const ifRange = reqHeaders['if-range'];
-    if (!ifRange || matchesETag(ifRange, etag) || ifRange.trim() === mtimeUTC) {
+    if (!ifRange) {
       processRange = true;
+    } else if (matchesETag(ifRange, etag)) {
+      processRange = true;
+    } else {
+      const ifRangeDate = new Date(ifRange);
+      if (!isNaN(ifRangeDate.getTime())) {
+        const fileSec = Math.floor(fileStat.mtime.getTime() / 1000);
+        const ifRangeSec = Math.floor(ifRangeDate.getTime() / 1000);
+        if (fileSec === ifRangeSec) {
+          processRange = true;
+        }
+      }
     }
   }
 
   if (processRange) {
     const rangeSpec = rangeHeader.slice(6).trim();
-    // If multipart range (contains comma), fall back to full 200 representation
+    // If multipart range (contains comma), fall back to full 200 representation per RFC 7233 §4.3
     if (!rangeSpec.includes(',')) {
       const parts = rangeSpec.split('-');
-      let start = parts[0] !== '' ? parseInt(parts[0], 10) : NaN;
-      let end = parts[1] !== '' ? parseInt(parts[1], 10) : NaN;
+      if (parts.length === 2) {
+        let start = parts[0].trim() !== '' ? parseInt(parts[0].trim(), 10) : NaN;
+        let end = parts[1].trim() !== '' ? parseInt(parts[1].trim(), 10) : NaN;
 
-      if (isNaN(start) && !isNaN(end)) {
-        // Suffix byte range: bytes=-500 (last 500 bytes, clamped to file bounds per RFC 7233 §2.1)
-        start = Math.max(0, fileStat.size - end);
-        end = fileStat.size - 1;
-      } else if (!isNaN(start) && isNaN(end)) {
-        // Open byte range: bytes=500-
-        end = fileStat.size - 1;
-      }
-
-      if (isNaN(start) || isNaN(end) || start < 0 || start > end || start >= fileStat.size) {
-        headers['Content-Range'] = `bytes */${fileStat.size}`;
-        res.writeHead(416, headers);
-        return res.end('Requested Range Not Satisfiable');
-      }
-
-      // Clamp end to file bounds
-      if (end >= fileStat.size) {
-        end = fileStat.size - 1;
-      }
-
-      const chunkSize = end - start + 1;
-      headers['Content-Range'] = `bytes ${start}-${end}/${fileStat.size}`;
-      headers['Content-Length'] = chunkSize;
-
-      res.writeHead(206, headers);
-      const rangeStream = fs.createReadStream(resolvedPath, { start, end });
-      const cleanup = () => rangeStream.destroy();
-      req.on('close', cleanup);
-      res.on('close', cleanup);
-      rangeStream.on('error', () => {
-        if (!res.headersSent) {
-          res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+        if (isNaN(start) && !isNaN(end)) {
+          // Suffix byte range: bytes=-500 (last 500 bytes, clamped to file bounds per RFC 7233 §2.1)
+          start = Math.max(0, fileStat.size - end);
+          end = fileStat.size - 1;
+        } else if (!isNaN(start) && isNaN(end)) {
+          // Open byte range: bytes=500-
+          end = fileStat.size - 1;
         }
-        res.end('Internal Server Error');
-      });
-      return rangeStream.pipe(res);
+
+        if (isNaN(start) || isNaN(end) || start < 0 || start > end || start >= fileStat.size) {
+          headers['Content-Range'] = `bytes */${fileStat.size}`;
+          res.writeHead(416, headers);
+          return res.end('Requested Range Not Satisfiable');
+        }
+
+        // Clamp end to file bounds
+        if (end >= fileStat.size) {
+          end = fileStat.size - 1;
+        }
+
+        const chunkSize = end - start + 1;
+        headers['Content-Range'] = `bytes ${start}-${end}/${fileStat.size}`;
+        headers['Content-Length'] = chunkSize;
+
+        res.writeHead(206, headers);
+        const rangeStream = fs.createReadStream(resolvedPath, { start, end });
+        const cleanup = () => rangeStream.destroy();
+        req.on('close', cleanup);
+        res.on('close', cleanup);
+        rangeStream.on('error', () => {
+          if (!res.headersSent) {
+            res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+          }
+          res.end('Internal Server Error');
+        });
+        return rangeStream.pipe(res);
+      }
     }
   }
 
