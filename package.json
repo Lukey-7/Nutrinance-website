@@ -4,7 +4,7 @@
   "private": true,
   "description": "Nutrinance Wellbeing website",
   "scripts": {
-    "build": "echo 'Building static site...'",
+    "build": "node build.js",
     "start": "node scripts/server.js"
   }
 }
