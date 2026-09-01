@@ -70,6 +70,8 @@ async function testServerEntrypoint() {
       assert.strictEqual(res.statusCode, 200);
       assert(res.headers['content-type'].includes('text/css'));
       assert(res.headers['cache-control'].includes('immutable') || res.headers['cache-control'].includes('max-age'));
+      assert(res.headers['etag']);
+      assert(res.headers['last-modified']);
       assert(res.body.length > 100);
     });
 
@@ -113,14 +115,22 @@ async function testServerEntrypoint() {
       assert(res.body.length > 0);
     });
 
-    // 8. Query parameter handling
+    // 8. Clean URL with trailing slash: /nutrinance-demo/
+    await check('GET /nutrinance-demo/ resolves clean URL with trailing slash to nutrinance-demo.html', async () => {
+      const res = await rawRequest('/nutrinance-demo/');
+      assert.strictEqual(res.statusCode, 200);
+      assert(res.headers['content-type'].includes('text/html'));
+      assert(res.body.length > 0);
+    });
+
+    // 9. Query parameter handling
     await check('GET /styles.css?v=test1234 resolves correctly with query params', async () => {
       const res = await rawRequest('/styles.css?v=test1234');
       assert.strictEqual(res.statusCode, 200);
       assert(res.headers['content-type'].includes('text/css'));
     });
 
-    // 9. HEAD request
+    // 10. HEAD request
     await check('HEAD / serves headers without body', async () => {
       const res = await rawRequest('/', { method: 'HEAD' });
       assert.strictEqual(res.statusCode, 200);
@@ -128,35 +138,102 @@ async function testServerEntrypoint() {
       assert.strictEqual(res.body.length, 0);
     });
 
-    // 10. Security: Hidden / Dotfile Protection
+    // 11. CORS Preflight OPTIONS request
+    await check('OPTIONS / returns 204 with CORS and Allow headers', async () => {
+      const res = await rawRequest('/', { method: 'OPTIONS' });
+      assert.strictEqual(res.statusCode, 204);
+      assert.strictEqual(res.headers['access-control-allow-origin'], '*');
+      assert(res.headers['access-control-allow-methods'].includes('GET'));
+      assert(res.headers['access-control-allow-methods'].includes('OPTIONS'));
+      assert.strictEqual(res.body.length, 0);
+    });
+
+    // 12. Security: Hidden / Dotfile Protection
     await check('GET /.git/config returns 403 Forbidden', async () => {
       const res = await rawRequest('/.git/config');
       assert.strictEqual(res.statusCode, 403);
     });
 
-    // 11. Security: Path Traversal Protection
+    // 13. Security: Path Traversal Protection
     await check('GET /../../windows/win.ini returns 403 Forbidden', async () => {
       const res = await rawRequest('/%2e%2e/%2e%2e/windows/win.ini');
       assert.strictEqual(res.statusCode, 403);
     });
 
-    // 12. 404 Not Found for non-existent routes
+    // 14. 404 Not Found for non-existent routes
     await check('GET /non-existent-route-404.html returns 404', async () => {
       const res = await rawRequest('/non-existent-route-404.html');
       assert.strictEqual(res.statusCode, 404);
     });
 
-    // 13. 405 Method Not Allowed for POST
-    await check('POST / returns 405 Method Not Allowed', async () => {
-      const res = await rawRequest('/', { method: 'POST' });
-      assert.strictEqual(res.statusCode, 405);
+    // 15. Directory route without index.html returns 404
+    await check('GET /assets returns 404 when directory lacks index.html', async () => {
+      const res = await rawRequest('/assets');
+      assert.strictEqual(res.statusCode, 404);
     });
 
-    // 14. Security header X-Content-Type-Options
+    // 16. 405 Method Not Allowed for POST/PUT with Allow header
+    await check('POST / returns 405 with Allow header', async () => {
+      const res = await rawRequest('/', { method: 'POST' });
+      assert.strictEqual(res.statusCode, 405);
+      assert(res.headers['allow'].includes('GET'));
+      assert(res.headers['allow'].includes('OPTIONS'));
+    });
+
+    // 17. Security header X-Content-Type-Options & CORS
     await check('Responses include X-Content-Type-Options: nosniff and Access-Control-Allow-Origin: *', async () => {
       const res = await rawRequest('/styles.css');
       assert.strictEqual(res.headers['x-content-type-options'], 'nosniff');
       assert.strictEqual(res.headers['access-control-allow-origin'], '*');
+      assert.strictEqual(res.headers['accept-ranges'], 'bytes');
+    });
+
+    // 18. HTTP 206 Partial Content (Byte Range Request start-end)
+    await check('GET /styles.css with Range: bytes=0-49 returns 206 Partial Content', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'Range': 'bytes=0-49' } });
+      assert.strictEqual(res.statusCode, 206);
+      assert.strictEqual(res.body.length, 50);
+      assert(res.headers['content-range'].startsWith('bytes 0-49/'));
+      assert.strictEqual(res.headers['content-length'], '50');
+    });
+
+    // 19. HTTP 206 Partial Content (Byte Range Request suffix)
+    await check('GET /styles.css with Range: bytes=-50 returns 206 with last 50 bytes', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'Range': 'bytes=-50' } });
+      assert.strictEqual(res.statusCode, 206);
+      assert.strictEqual(res.body.length, 50);
+      assert(res.headers['content-range'].includes('/'));
+    });
+
+    // 20. HTTP 416 Range Not Satisfiable
+    await check('GET /styles.css with unsatisfiable range returns 416', async () => {
+      const res = await rawRequest('/styles.css', { headers: { 'Range': 'bytes=9999999-9999999' } });
+      assert.strictEqual(res.statusCode, 416);
+      assert(res.headers['content-range'].startsWith('bytes */'));
+    });
+
+    // 21. HTTP 304 Conditional Request (If-None-Match)
+    await check('GET /styles.css with matching If-None-Match returns 304 Not Modified', async () => {
+      const initRes = await rawRequest('/styles.css');
+      const etag = initRes.headers['etag'];
+      assert(etag);
+      const condRes = await rawRequest('/styles.css', { headers: { 'If-None-Match': etag } });
+      assert.strictEqual(condRes.statusCode, 304);
+      assert.strictEqual(condRes.body.length, 0);
+    });
+
+    // 22. HTTP 304 Conditional Request (If-Modified-Since)
+    await check('GET /styles.css with fresh If-Modified-Since returns 304 Not Modified', async () => {
+      const futureDate = new Date(Date.now() + 86400000).toUTCString();
+      const condRes = await rawRequest('/styles.css', { headers: { 'If-Modified-Since': futureDate } });
+      assert.strictEqual(condRes.statusCode, 304);
+      assert.strictEqual(condRes.body.length, 0);
+    });
+
+    // 23. Malformed URI handling
+    await check('GET /% malformed URL returns 400 Bad Request', async () => {
+      const res = await rawRequest('/%');
+      assert.strictEqual(res.statusCode, 400);
     });
 
     return { total, passed, failed: failures.length, failures };
@@ -181,3 +258,4 @@ if (require.main === module) {
 }
 
 module.exports = { run: testServerEntrypoint, testServerEntrypoint };
+
