@@ -9,7 +9,7 @@ echo.
 netstat -ano | findstr :5599 >nul
 if %errorlevel% neq 0 (
     echo Starting Node server on http://localhost:5599 ...
-    start "" /B node server.js
+    start "" /B node "%~dp0scripts\server.js"
     timeout /t 2 /nobreak >nul
 ) else (
     echo Local Node server is running on port 5599.
