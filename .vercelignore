@@ -1,0 +1,8 @@
+# Ignore backend/local development files from Vercel build
+server.js
+start-online.bat
+cloudflared.exe
+tests/
+scratch/
+.git/
+.github/
