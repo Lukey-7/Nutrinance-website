@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "Nutrinance Wellbeing website",
+  "main": "index.js",
   "scripts": {
     "build": "node build.js",
-    "start": "node scripts/server.js"
+    "start": "node index.js",
+    "test": "node tests/run-e2e-tests.js"
   }
 }

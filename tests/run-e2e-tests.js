@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Master E2E & Component Test Runner for Nutrinance Single-Page Website
- * Executes Tiers 1 through 4 comprehensively and prints formatted test reports.
+ * Executes Tiers 1 through 6 comprehensively and prints formatted test reports.
  */
 
 const tier1Runner = require('./tier1-feature-coverage.test');
@@ -10,6 +10,7 @@ const tier3Runner = require('./tier3-pairwise-combinations.test');
 const tier4Runner = require('./tier4-real-world-scenarios.test');
 const tier5IntegrationsRunner = require('./tier5_adversarial_integrations.test');
 const tier5ScrollRunner = require('./tier5_adversarial_scroll.test');
+const serverEntrypointRunner = require('./server-entrypoint.test');
 
 const ANSI = {
   reset: '\x1b[0m',
@@ -35,7 +36,8 @@ async function runAllTiers() {
     { name: 'Tier 3: Cross-Feature Pairwise Combinations', runner: tier3Runner, min: 14 },
     { name: 'Tier 4: Real-World Application Scenarios', runner: tier4Runner, min: 7 },
     { name: 'Tier 5A: Adversarial Integrations & WhatsApp/Instagram Hardening', runner: tier5IntegrationsRunner, min: 30 },
-    { name: 'Tier 5B: Adversarial Scroll Engine, WAAPI & GSAP Hardening', runner: tier5ScrollRunner, min: 30 }
+    { name: 'Tier 5B: Adversarial Scroll Engine, WAAPI & GSAP Hardening', runner: tier5ScrollRunner, min: 30 },
+    { name: 'Tier 6: Universal Serverless & Static HTTP Entrypoint', runner: serverEntrypointRunner, min: 14 }
   ];
 
   let grandTotal = 0;
@@ -55,7 +57,7 @@ async function runAllTiers() {
     grandPassed += result.passed;
     grandFailed += result.failed;
 
-    if (result.failures.length > 0) {
+    if (result.failures && result.failures.length > 0) {
       allFailures.push(...result.failures);
     }
 
@@ -111,7 +113,7 @@ async function runAllTiers() {
     console.log(`\n${ANSI.red}${ANSI.bold}TEST SUITE FAILED${ANSI.reset}\n`);
     process.exit(1);
   } else {
-    console.log(`${ANSI.green}${ANSI.bold}✔ ALL 5 TIERS PASSED PERFECTLY! 100% SUCCESS RATE (${grandPassed}/${grandTotal})${ANSI.reset}\n`);
+    console.log(`${ANSI.green}${ANSI.bold}✔ ALL TIERS PASSED PERFECTLY! 100% SUCCESS RATE (${grandPassed}/${grandTotal})${ANSI.reset}\n`);
     process.exit(0);
   }
 }

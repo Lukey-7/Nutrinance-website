@@ -12,5 +12,13 @@ Thumbs.db
 # Logs
 *.log
 
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+public/
+out/
+
 # Agent Metadata
 .agents/
